@@ -6,7 +6,8 @@ import { NavLink, useLocation, useNavigate } from 'react-router';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
 import { GoogleAuthProvider } from 'firebase/auth';
-import UseAxiosSecure from './UseAxiosSecure';
+import UseAxiosSecure from './useAxiosSecure';
+
 
 const Register = () => {
     const axiosSecure = UseAxiosSecure();
@@ -122,15 +123,17 @@ navigate('/');
 
 
   const handleImage=async(e)=>{
-const image =e.target.files[0];
-console.log(image);
-const formData=new FormData();
-formData.append('image',image);
+  const formData = new FormData();
+  formData.append("image", e.target.files[0]);
 
-const imguploadUrl=`https://api.imgbb.com/1/upload?&key=${import.meta.env.VITE_img_upload_key}`;
-const res= await axios.post(imguploadUrl,formData);
-console.log(res.data); 
-setPic(res.data.data.url);
+  const res = await fetch("http://localhost:3000/api/upload", {
+    method: "POST",
+    body: formData,
+  });
+
+  const data = await res.json();
+  console.log("Uploaded image URL:", data.imageUrl);
+setPic(data.imageUrl);
 }
     return (
     <div className="flex flex-col min-h-screen justify-center items-center ">
