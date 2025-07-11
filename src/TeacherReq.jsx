@@ -1,135 +1,122 @@
-import React, { use } from 'react';
-import { useForm } from 'react-hook-form';
+import React from 'react';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
-import { useMutation } from '@tanstack/react-query';
-import { AuthContext } from './AuthProvider';
-
 
 const TeacherReq = () => {
-  const { user } =use(AuthContext) ; // Assuming user = { displayName, email, photoURL }
   const axiosSecure = useAxiosSecure();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm();
+  const queryClient = useQueryClient();
 
-  const { mutateAsync: submitRequest, isPending, isSuccess } = useMutation({
-    mutationFn: async (formData) => {
-      const res = await axiosSecure.post('/teacher-requests', formData);
+  // Fetch teacher requests with pending/accepted/rejected
+  const { data: requests = [], isLoading } = useQuery({
+    queryKey: ['teacherRequests'],
+    queryFn: async () => {
+      const res = await axiosSecure.get('/teacher-requests');
       return res.data;
-    },
-    onSuccess: () => {
-      reset();
     },
   });
 
-  const onSubmit = async (data) => {
-    const payload = {
-      name: user.displayName,
-      email: user.email,
-      image: user.photoURL,
-      title: data.title,
-      experience: data.experience,
-      category: data.category,
-      status: 'pending',
-      submittedAt: new Date(),
-    };
-    await submitRequest(payload);
+  // Approve request + update user role
+  const approveMutation = useMutation({
+    mutationFn: async ({ requestId, userEmail }) => {
+      const res = await axiosSecure.patch(`/teacher-requests/approve/${requestId}`, {
+        email: userEmail,
+      });
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['teacherRequests']);
+    },
+  });
+
+  // Reject request
+  const rejectMutation = useMutation({
+    mutationFn: async (requestId) => {
+      const res = await axiosSecure.patch(`/teacher-requests/reject/${requestId}`);
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['teacherRequests']);
+    },
+  });
+
+  const handleApprove = (id, email) => {
+    approveMutation.mutate({ requestId: id, userEmail: email });
   };
 
+  const handleReject = (id) => {
+    rejectMutation.mutate(id);
+  };
+
+  if (isLoading) return <p className="text-center py-10">Loading...</p>;
+
   return (
-    <div className="max-w-xl mx-auto bg-white shadow-md rounded p-6 mt-8">
-      <h2 className="text-2xl font-bold mb-4">Apply for Teacher Position</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="overflow-x-auto p-4 max-w-6xl mx-auto">
+      <h2 className="text-2xl font-bold mb-4">Teacher Requests</h2>
 
-        {/* Name (auto-filled) */}
-        <div>
-          <label className="label">Name</label>
-          <input
-            type="text"
-            defaultValue={user?.displayName || ''}
-            readOnly
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        {/* Email (auto-filled, read-only) */}
-        <div>
-          <label className="label">Email</label>
-          <input
-            type="email"
-            defaultValue={user?.email || ''}
-            readOnly
-            className="input input-bordered w-full"
-          />
-        </div>
-
-        {/* Image (auto-filled, hidden or preview only) */}
-        <div>
-          <label className="label">Profile Image</label>
-          <img
-            src={user?.photoURL}
-            alt="Profile"
-            className="w-16 h-16 rounded-full"
-          />
-        </div>
-
-        {/* Title */}
-        <div>
-          <label className="label">Title</label>
-          <input
-            type="text"
-            {...register('title', { required: true })}
-            placeholder="Ex: Frontend Developer"
-            className="input input-bordered w-full"
-          />
-          {errors.title && <p className="text-red-500 text-sm">Title is required</p>}
-        </div>
-
-        {/* Experience */}
-        <div>
-          <label className="label">Experience Level</label>
-          <select
-            {...register('experience', { required: true })}
-            className="select select-bordered w-full"
-            defaultValue=""
-          >
-            <option value="" disabled>Select experience</option>
-            <option value="beginner">Beginner</option>
-            <option value="mid-level">Mid-level</option>
-            <option value="experienced">Experienced</option>
-          </select>
-          {errors.experience && <p className="text-red-500 text-sm">Experience is required</p>}
-        </div>
-
-        {/* Category */}
-        <div>
-          <label className="label">Category</label>
-          <select
-            {...register('category', { required: true })}
-            className="select select-bordered w-full"
-            defaultValue=""
-          >
-            <option value="" disabled>Select category</option>
-            <option value="web development">Web Development</option>
-            <option value="digital marketing">Digital Marketing</option>
-            <option value="graphic design">Graphic Design</option>
-            <option value="data science">Data Science</option>
-            <option value="ui/ux">UI/UX Design</option>
-          </select>
-          {errors.category && <p className="text-red-500 text-sm">Category is required</p>}
-        </div>
-
-        {/* Submit Button */}
-        <div>
-          <button type="submit" className="btn btn-primary w-full" disabled={isPending}>
-            {isPending ? 'Submitting...' : 'Submit for Review'}
-          </button>
-          {isSuccess && <p className="text-green-500 mt-2">Request submitted successfully!</p>}
-        </div>
-      </form>
+      <table className="table w-full border">
+        <thead className="bg-base-200">
+          <tr>
+            <th>#</th>
+            <th>Profile</th>
+            <th>Name</th>
+            <th>Experience</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {requests.map((req, idx) => {
+            const isFinal = req.status === 'accepted' || req.status === 'rejected';
+            return (
+              <tr key={req._id}>
+                <td>{idx + 1}</td>
+                <td>
+                  <div className="avatar">
+                    <div className="w-12 rounded-full">
+                      <img src={req.image || 'https://i.ibb.co/2FsfXqM/default-avatar.png'} alt={req.name} />
+                    </div>
+                  </div>
+                </td>
+                <td>{req.name}</td>
+                <td>{req.experience}</td>
+                <td>{req.title}</td>
+                <td>{req.category}</td>
+                <td>
+                  <span
+                    className={`badge ${
+                      req.status === 'pending'
+                        ? 'badge-warning'
+                        : req.status === 'accepted'
+                        ? 'badge-success'
+                        : 'badge-error'
+                    }`}
+                  >
+                    {req.status}
+                  </span>
+                </td>
+                <td className="space-x-2">
+                  <button
+                    onClick={() => handleApprove(req._id, req.email)}
+                    disabled={isFinal}
+                    className="btn btn-success btn-sm"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    onClick={() => handleReject(req._id)}
+                    disabled={isFinal}
+                    className="btn btn-error btn-sm"
+                  >
+                    Reject
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 };

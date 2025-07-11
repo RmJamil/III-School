@@ -26,9 +26,12 @@ const Navbar = () => {
   };
     return (
         <div>
-            <div className="navbar bg-base-100 shadow-sm">
-  <div className="flex-1">
+            <div className="navbar bg-green-500 flex justify-between shadow-sm ">
+  <div className="">
     <a className="btn btn-ghost lg:text-4xl font-bold text-green-600">Edu Manage</a>
+  </div>
+  <div>
+    <NavLink to='/'><button className='btn'>Home</button></NavLink>
   </div>
   <div className="flex gap-2">
     <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />

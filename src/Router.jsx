@@ -12,6 +12,11 @@ import Users from "./Users";
 import TeacherReq from "./TeacherReq";
 import AllClasses from "./AllClasses";
 import Profile from "./Profile";
+import TeacherForm from "./TeacherForm";
+import PendingTeachers from "./PendingTeacher";
+import AddClass from "./AddClass";
+import MyClasses from "./MyClasses";
+import UpdateClass from "./UpdateClass";
 
 export const router = createBrowserRouter([
   {
@@ -52,13 +57,39 @@ export const router = createBrowserRouter([
         element:<TeacherReq/>
       },
       {
+        path:'pending-teachers',
+        element:<PendingTeachers/>
+      },
+      {
         path:'all-classes',
         element:<AllClasses/>
       },
       {
         path:'profile',
         element:<Profile/>
+      },
+      {
+        path:'teacherform',
+        element:<TeacherForm/>
+
+      },
+      {
+        path:'addclass',
+        element:<AddClass/>
+      },
+      {
+        path:'my-classes',
+        element:<MyClasses/>,
+      },
+      {
+        path:'updateclass/:classid',
+        element:<UpdateClass/>,
+        loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/updateclasses/${params.classid}`);
+    return res.json(); 
       }
+    }
+   
     ]
   }
 ]);

@@ -3,7 +3,7 @@ import Users from './Users';
 import Navbar from './Navbar';
 import './index.css';
 import { NavLink, Outlet } from 'react-router';
-import { FaChalkboardTeacher, FaUserCircle, FaUsers, FaUserTie } from 'react-icons/fa';
+import { FaChalkboard, FaChalkboardTeacher, FaPlusCircle, FaUserCircle, FaUserClock, FaUsers, FaUserTie } from 'react-icons/fa';
 
 const DashboardLayout = () => {
     return (
@@ -49,6 +49,38 @@ const DashboardLayout = () => {
           Teacher Request
         </NavLink>
       </li>
+
+      <li>
+  <NavLink
+    to="/dashboard/pending-teachers"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    <FaUserClock />
+    Pending Teachers
+  </NavLink>
+</li>
+<li>
+  <NavLink
+    to="/dashboard/addclass"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    <FaPlusCircle />
+    Add Class
+  </NavLink>
+</li>
+
+<li>
+  <NavLink
+    to="/dashboard/my-classes"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    <FaChalkboard />
+    My Classes
+  </NavLink>
+</li>
+
+
+
       <li>
         <NavLink to="/dashboard/users" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <FaUsers />

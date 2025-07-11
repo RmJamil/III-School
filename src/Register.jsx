@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import React, { use, useState } from 'react';
 
 import { useForm } from 'react-hook-form';
@@ -13,14 +13,17 @@ const Register = () => {
     const axiosSecure = UseAxiosSecure();
   const provider =new GoogleAuthProvider();
   const {user,createUser,updateUser,googleSignIn,setUser}=use(AuthContext);
-  const [pic,setPic]=useState('')
+
   const [errMsg,setErrMsg]=useState('')
   const [errorMsg,setErrorMsg]=useState('')
+
+    const [uploadedUrl, setUploadedUrl] = useState('');
+    const [loading, setLoading] = useState(false);
   const {register,handleSubmit,formState:{errors}}=useForm();
   const location=useLocation();
 
    const navigate=useNavigate();
-console.log(pic);
+
 
   const handleGoogle=()=>{
         googleSignIn(provider).then(result=>{
@@ -66,7 +69,7 @@ return
   createUser(data.email,data.password).then(async(result)=>{
 console.log(result.user);
 const userProfile={
-  displayName:data.name,photoURL:pic
+  displayName:data.name,photoURL:uploadedUrl
 }
 
 
@@ -76,7 +79,7 @@ console.log(userProfile)
       const newuser = {
         name: data.name,
         email: data.email,
-        photo:pic,
+        photo:uploadedUrl,
         role: 'student', // optional default role
       };
 console.log(newuser)
@@ -125,16 +128,32 @@ navigate('/');
   const handleImage=async(e)=>{
   const formData = new FormData();
   formData.append("image", e.target.files[0]);
-
-  const res = await fetch("http://localhost:3000/api/upload", {
+try{
+    const res = await fetch("http://localhost:3000/api/upload", {
     method: "POST",
     body: formData,
   });
 
   const data = await res.json();
   console.log("Uploaded image URL:", data.imageUrl);
-setPic(data.imageUrl);
+
+
+ if (data.imageUrl) {
+        setUploadedUrl(data.imageUrl);
+      } else {
+        alert('Upload failed.');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('An error occurred while uploading.');
+    } finally {
+      setLoading(false);
+    }
 }
+
+
+
+
     return (
     <div className="flex flex-col min-h-screen justify-center items-center ">
         <div><p className='text-3xl font-bold m-4'>Please Register</p></div>
@@ -150,7 +169,20 @@ setPic(data.imageUrl);
           <p className='text-lg text-red-500'>Name is required</p> }
 
           <label className="label">Upload photo</label>
-          <input type="file" onChange={handleImage} placeholder='Your photo' />
+          <input className='file-input file-input-bordered w-full max-w-xs' type="file" onChange={handleImage} placeholder='Your photo' />
+
+
+           {loading && <p className="text-blue-600">Uploading...</p>}
+         {uploadedUrl && (
+        <div className="mt-4">
+          <p className="text-sm text-green-600 my-1">Uploaded image:</p>
+          <img
+            src={uploadedUrl}
+            alt="image"
+            className="w-48 h-auto rounded border"
+          />
+        </div>
+      )}
           <label className="label">Email</label>
           <input type="email" {...register('email',{ required: "Email Address is required" })} className="p-2 text-lg bg-white text-black border-1 border-black" placeholder="Email" />
           {
