@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Swal from 'sweetalert2';
 
@@ -17,7 +17,7 @@ const MyClasses = () => {
   const { data: classes = [], isLoading } = useQuery({
     queryKey: ['my-classes', user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`/classes?email=${user?.email}`);
+      const res = await axiosSecure.get(`/myclasses?email=${user?.email}`);
       return res.data;
     },
     enabled: !!user?.email,
@@ -26,7 +26,7 @@ const MyClasses = () => {
   // Delete mutation
   const deleteMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await axiosSecure.delete(`/classes/${id}`);
+      const res = await axiosSecure.delete(`/myclasses/${id}`);
       return res.data;
     },
     onSuccess: () => {
@@ -83,7 +83,7 @@ const MyClasses = () => {
               <div className="flex flex-wrap gap-2 mt-4">
                 <Link to={`/dashboard/updateclass/${classItem._id}`}>
                 <button
-                  onClick={() => setEditClassId(classItem._id)}
+            
                   className="btn btn-sm btn-outline btn-primary"
                 >
                   Update

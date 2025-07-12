@@ -17,6 +17,10 @@ import PendingTeachers from "./PendingTeacher";
 import AddClass from "./AddClass";
 import MyClasses from "./MyClasses";
 import UpdateClass from "./UpdateClass";
+import ApprovedClasses from "./ApprovedClasses";
+import Progress from "./Progress";
+import ClassDetails from "./ClassDetails";
+import Payment from "./Payment";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +92,31 @@ export const router = createBrowserRouter([
     const res = await fetch(`http://localhost:3000/updateclasses/${params.classid}`);
     return res.json(); 
       }
+    },
+    {
+      path:'approvedclasses',
+      element:<ApprovedClasses/>
+    },
+    {
+      path:'progress/:id',
+      element:<Progress/>,
+      loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/updateclasses/${params.id}`);
+    return res.json(); 
+      }
+    },
+    {
+      path:'classdetails/:classid',
+      element:<ClassDetails/>,
+      loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/updateclasses/${params.classid}`);
+    return res.json(); 
+      }
+
+    },
+    {
+      path:'payment/:id',
+      element:<Payment/>
     }
    
     ]
