@@ -21,6 +21,8 @@ import ApprovedClasses from "./ApprovedClasses";
 import Progress from "./Progress";
 import ClassDetails from "./ClassDetails";
 import Payment from "./Payment";
+import DownloadPaymentDetails from "./DownloadPaymentDetails";
+import Enrolled from "./Enrolled";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +119,14 @@ export const router = createBrowserRouter([
     {
       path:'payment/:id',
       element:<Payment/>
+    },
+    {
+      path:'download/:transactionId',
+      element:<DownloadPaymentDetails/>
+    },
+    {
+      path:'enrolled-classes',
+      element:<Enrolled/>
     }
    
     ]

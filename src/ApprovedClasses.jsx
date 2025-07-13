@@ -1,25 +1,37 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useContext } from 'react';
+import { useContext} from 'react';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
 import UseAxiosSecure from './useAxiosSecure';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const ApprovedClasses = () => {
   const axiosSecure = UseAxiosSecure();
   const { user } = useContext(AuthContext);
-
-  const { data: classes = [], refetch } = useQuery({
+  const navigate=useNavigate();
+  // const [alreadyPaid, setAlreadyPaid] = useState(true);
+  const { data: classes = [] } = useQuery({
     queryKey: ['approved-classes'],
     queryFn: async () => {
       const res = await axiosSecure.get('/class/approved');
       return res.data;
     },
   });
+  //  useEffect(() => {
+  //   if (user?.email && classId) {
+  //     axiosSecure.post('/payments/validate', { email: user.email, classId }).then((res) => {
+  //         setAlreadyPaid(res.data.exists);
+  //       });
+  //   }
+  // }, [user?.email, classId,axiosSecure]);
+  
+  // console.log(alreadyPaid)
+  
 
 
   const handleEnroll = async (classItem) => {
+    navigate(`/dashboard/classdetails/${classItem._id}`)
     // try {
     //   const res = await axiosSecure.patch(`/class/enroll/${classItem._id}`, {
     //     email: user?.email,
@@ -58,7 +70,7 @@ const ApprovedClasses = () => {
             <p className="text-gray-700">Price: ${classItem.price}</p>
             <p className="text-gray-500 text-sm">{classItem.description?.slice(0, 80)}...</p>
             <p className="text-sm font-medium text-blue-600">Total Enrolled: {classItem.students?.length || 0}</p>
-     <Link to={`/dashboard/classdetails/${classItem._id}`}>
+   
             <button
               onClick={() => handleEnroll(classItem)}
               className=" btn mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer"
@@ -66,7 +78,7 @@ const ApprovedClasses = () => {
             >
               {classItem.students?.includes(user?.email) ? 'Already Enrolled' : 'Enroll now'}
             </button>
-     </Link>
+
           </div>
         </div>
       ))}
