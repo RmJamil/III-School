@@ -12,6 +12,20 @@ const PaymentForm = () => {
 
   const [error,setError]=useState('');
   const axiosSecure = UseAxiosSecure();
+
+   const { data: classData={},isLoading,} = useQuery({
+    queryKey: ['class', id],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/classes/${id}`);
+      return res.data;
+    },
+    enabled: !!id, // only run query if classId exists
+  });
+
+
+    const amount=classData.price*100;
+    const classId=classData._id;
+    console.log(amount,classId)
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
@@ -44,21 +58,33 @@ const PaymentForm = () => {
         setError('');
       console.log('[PaymentMethod]', paymentMethod);
     }
+
+    const res= await axiosSecure.post('/create-payment-intent',{
+      amount,classId
+
+    })
+    const clientSecret=res.data.clientSecret;
+
+
+    const result = await stripe.confirmCardPayment(clientSecret, {
+  payment_method: {
+    card: elements.getElement(CardElement),
+  },
+});
+    console.log('res from intent',res );
+if(result.error){
+  console.log(result.error.message);
+}
+else{
+  if(result.paymentIntent.status==='succeeded'){
+    console.log('payment succeeded !')
+  }
+}
+
   };
 
 
-  const {
-    data: classData={},
-    isLoading,
-  
-  } = useQuery({
-    queryKey: ['class', id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/classes/${id}`);
-      return res.data;
-    },
-    enabled: !!id, // only run query if classId exists
-  });
+ 
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
 
