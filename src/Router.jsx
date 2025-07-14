@@ -23,6 +23,9 @@ import ClassDetails from "./ClassDetails";
 import Payment from "./Payment";
 import DownloadPaymentDetails from "./DownloadPaymentDetails";
 import Enrolled from "./Enrolled";
+import MyEnrolledClassDetails from "./MyEnrolledClassDetails";
+import MyProfile from "./MyProfile";
+import UseAxiosSecure from "./useAxiosSecure";
 
 export const router = createBrowserRouter([
   {
@@ -68,12 +71,13 @@ export const router = createBrowserRouter([
       },
       {
         path:'all-classes',
-        element:<AllClasses/>
+        element:<AllClasses/>,
+            loader: async () => {
+      const res = await fetch('http://localhost:3000/classCount');
+    return res.json(); 
+    },
       },
-      {
-        path:'profile',
-        element:<Profile/>
-      },
+
       {
         path:'teacherform',
         element:<TeacherForm/>
@@ -127,6 +131,18 @@ export const router = createBrowserRouter([
     {
       path:'enrolled-classes',
       element:<Enrolled/>
+    },
+    {
+      path:'payments/myenrolled/:id',
+      element:<MyEnrolledClassDetails/>,
+      loader: async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/updateclasses/${params.id}`);
+    return res.json(); 
+      }
+    },
+    {
+      path:'profile',
+      element:<MyProfile/>
     }
    
     ]

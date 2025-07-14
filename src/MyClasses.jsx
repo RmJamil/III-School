@@ -61,7 +61,7 @@ const MyClasses = () => {
         {classes.map((classItem) => (
           <div key={classItem._id} className="card bg-base-100 shadow-xl border">
             <figure>
-              <img src={classItem.image} alt={classItem.title} className="h-52 w-full object-cover" />
+              <img src={classItem.image || '/default-class.jpg'} alt={classItem.title} className="h-52 w-full object-cover" />
             </figure>
             <div className="card-body">
               <h3 className="card-title">{classItem.title}</h3>

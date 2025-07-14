@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
 import Swal from 'sweetalert2';
 import { FaCheck, FaTimes, FaForward } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useLoaderData } from 'react-router';
+import Pagination from './Pagination';
 
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
+// const totalItems=useLoaderData();
+// console.log(totalItems)
+ const { totalItems } = useLoaderData();
+  //  const [data, setData] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3;
 
+const[data,setData]=useState();
+
+
+console.log(totalItems)
+
+
+ 
   // Fetch all classes
   const { data: classes = [], isLoading } = useQuery({
     queryKey: ['all-classes'],
@@ -43,6 +57,17 @@ const AllClasses = () => {
     });
   };
 
+    useEffect(() => {
+    const fetchData = async () => {
+      const res = await axiosSecure.get(`/classes?page=${currentPage}&limit=${itemsPerPage}`);
+      setData(res.data); // your items
+       // total count from server
+    };
+
+    fetchData();
+  }, [currentPage,axiosSecure]);
+console.log(data);
+
   if (isLoading) return <p className="text-center py-10">Loading classes...</p>;
 
   return (
@@ -62,15 +87,15 @@ const AllClasses = () => {
           </tr>
         </thead>
         <tbody>
-          {classes.map((classItem, index) => (
-            <tr key={classItem._id} className=''>
-              <td>{index + 1}</td>
+          {data?.map((classItem, index) => (
+            <tr key={classItem._id} className=' lg:h-34'>
+              <td>  {(index + 1) + (currentPage - 1) * itemsPerPage}</td>
               <td>{classItem.title}</td>
               <td>
                 <img
-                  src={classItem.image}
-                  alt={classItem.title}
-                  className="w-16 h-9 rounded object-cover"
+                  src={classItem.image || '/default-class.jpg'}
+                  alt={classItem?.title}
+                  className="w-12 lg:w-24 lg:h-16 h-9 rounded object-cover"
                 />
               </td>
               <td>{classItem.email}</td>
@@ -92,8 +117,9 @@ const AllClasses = () => {
                   {classItem.status}
                 </span>
               </td>
-              <td className="flex gap-2 justify-center items-center ">
-                <button
+              <td className="flex gap-2 justify-center items-center  lg:my-12 ">
+               <div className=' flex gap-2'>
+                 <button
                   onClick={() => handleStatusChange(classItem._id, 'accepted')}
                   disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
                   className="btn btn-sm btn-success"
@@ -112,6 +138,7 @@ const AllClasses = () => {
                   <FaTimes />
                   Reject
                 </button>
+               </div>
               </td>
               <td>
        <Link to={classItem.status == 'accepted' && `/dashboard/progress/${classItem._id}`}>
@@ -129,6 +156,13 @@ const AllClasses = () => {
           ))}
         </tbody>
       </table>
+
+        <Pagination
+        currentPage={currentPage}
+        totalItems={totalItems}
+        itemsPerPage={itemsPerPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };

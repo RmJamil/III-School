@@ -11,6 +11,7 @@ const AddClass = () => {
    const [uploadedUrl, setUploadedUrl] = useState('');
     const [loading, setLoading] = useState(false);
   const { user } = use(AuthContext); // Get logged in user
+  console.log(uploadedUrl)
 
   const onSubmit = async (data) => {
     const classData = {
@@ -19,11 +20,11 @@ const AddClass = () => {
       email: user.email,
       price: parseFloat(data.price),
       description: data.description,
-      image: data.image,
+      image:uploadedUrl,
       status: 'pending',
       createdAt: new Date(),
     };
-
+console.log(uploadedUrl)
     try {
       const res = await axiosSecure.post('/addclass', classData);
       if (res.data.insertedId) {

@@ -127,6 +127,7 @@ else{
       classId,
       image:classData.image,
       title:classData.title,
+      teacher:classData.name,
       name:user?.displayName,
       email:user?.email,
       transactionId:result.paymentIntent.id,

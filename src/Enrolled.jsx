@@ -2,14 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 
 import { useContext } from 'react';
 
-import { FaDownload } from 'react-icons/fa';
+import { FaArrowRight, FaDownload } from 'react-icons/fa';
 import UseAxiosSecure from './useAxiosSecure';
 import { AuthContext } from './AuthProvider';
+import { useNavigate } from 'react-router';
 
 const Enrolled = () => {
   const { user } = useContext(AuthContext);
   const axiosSecure = UseAxiosSecure();
-
+  const navigate=useNavigate();
   const { data: payments = [], isLoading } = useQuery({
     queryKey: ['payments', user?.email],
     queryFn: async () => {
@@ -19,25 +20,46 @@ const Enrolled = () => {
     enabled: !!user?.email,
   });
 
+  // const handleDownload = async (transactionId) => {
+  //   try {
+  //     const res = await axiosSecure.get(`/payments/download/${transactionId}`, {
+  //       responseType: 'blob',
+  //     });
+
+  //     const blob = new Blob([res.data], { type: 'application/pdf' });
+  //     const url = window.URL.createObjectURL(blob);
+
+  //     const link = document.createElement('a');
+  //     link.href = url;
+  //     link.download = `receipt-${transactionId}.pdf`;
+  //     document.body.appendChild(link);
+  //     link.click();
+  //     link.remove();
+  //   } catch (error) {
+  //     console.error('Download error:', error);
+  //   }
+  // };
+
   const handleDownload = async (transactionId) => {
-    try {
-      const res = await axiosSecure.get(`/payments/download/${transactionId}`, {
-        responseType: 'blob',
-      });
+  try {
+    const res = await axiosSecure.get(`/payments/download/${transactionId}`, {
+      responseType: 'blob',
+    });
 
-      const blob = new Blob([res.data], { type: 'application/pdf' });
-      const url = window.URL.createObjectURL(blob);
+    const blob = new Blob([res.data], { type: 'application/pdf' });
+    const url = window.URL.createObjectURL(blob);
 
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = `receipt-${transactionId}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    } catch (error) {
-      console.error('Download error:', error);
-    }
-  };
+    // ✅ Open in new tab instead of downloading
+    window.open(url, '_blank');
+  } catch (error) {
+    console.error('Error opening receipt:', error);
+  }
+};
+
+const handleContinue=(id)=>{
+  navigate(`/dashboard/payments/myenrolled/${id}`)
+}
+
 
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
 
@@ -47,16 +69,23 @@ const Enrolled = () => {
         <div key={payment.transactionId} className="card bg-base-100 shadow-xl p-4 border">
           <div className="card-body">
             <img src={payment.image} alt="" />
-            <h2 className="card-title">{payment.className}</h2>
+            <h2 className="card-title">Class Name:<span className='text-green-600'>{payment.title}</span> </h2>
+            <h2 ><span className="text-lg font-bold">Teacher-name:</span> <span className='text-xl text-green-600'>{payment.teacher}</span></h2>
             <p><strong>Price:</strong> ${payment.amount}</p>
             <p><strong>Transaction:</strong> {payment.transactionId}</p>
-            <p><strong>Date:</strong> {new Date(payment.createdAt).toLocaleDateString()}</p>
+            <p><strong>Enrolled date:</strong> {new Date(payment.createdAt).toLocaleDateString()}</p>
             <button
               onClick={() => handleDownload(payment.transactionId)}
               className="btn btn-outline btn-primary mt-4 flex items-center gap-2"
             >
               <FaDownload /> Download Receipt
             </button>
+            <button
+  onClick={()=>handleContinue(payment.classId)}
+  className="btn btn-outline btn-success mt-4 flex items-center gap-2"
+>
+  <FaArrowRight /> Continue
+</button>
           </div>
         </div>
       ))}
