@@ -2,8 +2,11 @@ import React, { use } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
+import './index.css'
 
 const Navbar = () => {
+
+
   const{user,setUser,logout}=use(AuthContext);
   const navigate=useNavigate();
   console.log(user)
@@ -45,9 +48,9 @@ const Navbar = () => {
     <a className="mx-4 lg:text-4xl font-bold text-green-600">III School</a>
   </div>
   <div className='flex gap-4 justify-center w-2/3'>
-    <NavLink to='/'><button className='btn'>Home</button></NavLink>
-    <NavLink to='/dashboard/all-classes'><button className='btn'>All Classes</button></NavLink>
-     <NavLink to='/dashboard/teacherform'><button className='btn'>Teach on Tripl i Scool</button></NavLink>
+    <NavLink to='/' ><button className={`btn `}>Home</button></NavLink>
+    <NavLink to='/dashboard/approvedclasses'><button className='btn'>All Classes</button></NavLink>
+     <NavLink to='/dashboard/teacherform'><button className='btn'>Teach on Triple i School</button></NavLink>
   </div>
    <div>
     
@@ -96,8 +99,8 @@ const Navbar = () => {
       :
       (
   <>
-      <button className='btn'>   <NavLink to='/login'>Sign In</NavLink></button>
-      <button className='btn'><NavLink to='/register'>Sign up</NavLink></button>
+      <NavLink to='/login'> <button className='btn'>  Sign In</button></NavLink>
+      <NavLink to='/register'><button className='btn'>Sign up</button></NavLink>
       </>
       )
     }

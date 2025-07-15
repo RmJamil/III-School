@@ -5,8 +5,17 @@ import './index.css';
 import { NavLink, Outlet } from 'react-router';
 import { FaBookOpen, FaChalkboard, FaChalkboardTeacher, FaCheckCircle, FaPlusCircle, FaUser, FaUserCircle, FaUserClock, FaUsers, FaUserTie } from 'react-icons/fa';
 import { HiOutlineBriefcase } from 'react-icons/hi';
+import useUserRole from './useUserRole';
 
 const DashboardLayout = () => {
+
+   const { role, isRoleLoading } = useUserRole();
+
+  if (isRoleLoading){
+    <div className='flex justify-center items-center'>
+       return <span className="loading loading-bars loading-xl"></span>;
+    </div>
+  }
     return (
         <div className='w-11/12 mx-auto mt-6'>
             <Navbar></Navbar>
@@ -57,14 +66,16 @@ const DashboardLayout = () => {
   </NavLink>
 </li>
 
-     <li>
+{ !isRoleLoading && role==='admin' &&
+  <>
+  
+   <li>
         <NavLink to="/dashboard/teacher-request" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <FaUserTie />
           Teacher Request
         </NavLink>
       </li>
-
-      <li>
+            <li>
   <NavLink
     to="/dashboard/pending-teachers"
     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -73,7 +84,43 @@ const DashboardLayout = () => {
     Pending Teachers
   </NavLink>
 </li>
-<li>
+
+    <li>
+        <NavLink to="/dashboard/users" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <FaUsers />
+          Users
+        </NavLink>
+      </li>
+
+       <li>
+        <NavLink to="/dashboard/all-classes" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <FaChalkboardTeacher />
+       Classes to Approve
+        </NavLink>
+      </li>
+
+      <li>
+  <NavLink
+    to="/dashboard/profile"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    <FaUser />
+    My Profile
+  </NavLink>
+</li>
+
+
+
+  </>
+
+
+}
+
+
+   { !isRoleLoading && role==='admin' &&
+
+   <>
+   <li>
   <NavLink
     to="/dashboard/addclass"
     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -93,28 +140,36 @@ const DashboardLayout = () => {
   </NavLink>
 </li>
 
+<li>
+  <NavLink
+    to="/dashboard/profile"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+    <FaUser />
+    My Profile
+  </NavLink>
+</li>
+
+   
+   </>
+   
+}
 
 
-      <li>
-        <NavLink to="/dashboard/users" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <FaUsers />
-          Users
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/dashboard/all-classes" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-          <FaChalkboardTeacher />
-          All Classes
-        </NavLink>
-      </li>
 
+
+
+
+
+  
+     
       <li>
   <NavLink
     to="/dashboard/approvedclasses"
     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
   >
     <FaCheckCircle />
-    Approved Classes
+   All Classes
   </NavLink>
 </li>
 

@@ -1,12 +1,12 @@
 import React, { use } from 'react';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
   const{signIn}=use(AuthContext)
-
+const navigate=useNavigate();
     const {register,handleSubmit,formState:{errors}}=useForm();
   
     const onSubmit=data=>{
@@ -20,7 +20,7 @@ const Login = () => {
       text: "successfully logged in!",
       icon: "success",
       timer:1500
-    });
+    });  navigate('/');
   }).catch(error=>{
     console.log(error);
       Swal.fire({
@@ -30,6 +30,7 @@ const Login = () => {
     
     });
   })
+
 
     }
     return (
