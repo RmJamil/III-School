@@ -26,6 +26,7 @@ import Enrolled from "./Enrolled";
 import MyEnrolledClassDetails from "./MyEnrolledClassDetails";
 import MyProfile from "./MyProfile";
 import UseAxiosSecure from "./useAxiosSecure";
+import Forbidden from "./Forbidden";
 
 export const router = createBrowserRouter([
   {
@@ -146,6 +147,10 @@ export const router = createBrowserRouter([
     }
    
     ]
+  },
+  {
+    path:'forbidden',
+    element:<Forbidden/>
   }
 ]);
 

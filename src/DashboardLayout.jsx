@@ -56,7 +56,7 @@ const DashboardLayout = () => {
       {/* Sidebar content here */}
       <p className='p-3 lg:text-xl font-bold text-green-600'>Dashboard</p>
 
-      <li>
+      {/* <li>
   <NavLink
     to="/dashboard/teacherForm"
     className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
@@ -64,7 +64,7 @@ const DashboardLayout = () => {
      <HiOutlineBriefcase />
     Apply as Teacher
   </NavLink>
-</li>
+</li> */}
 
 { !isRoleLoading && role==='admin' &&
   <>
@@ -162,7 +162,7 @@ const DashboardLayout = () => {
 
 
   
-     
+{/*      
       <li>
   <NavLink
     to="/dashboard/approvedclasses"
@@ -171,7 +171,7 @@ const DashboardLayout = () => {
     <FaCheckCircle />
    All Classes
   </NavLink>
-</li>
+</li> */}
 
 
 
