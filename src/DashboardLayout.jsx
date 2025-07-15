@@ -4,17 +4,18 @@ import Navbar from './Navbar';
 import './index.css';
 import { NavLink, Outlet } from 'react-router';
 import { FaBookOpen, FaChalkboard, FaChalkboardTeacher, FaCheckCircle, FaPlusCircle, FaUser, FaUserCircle, FaUserClock, FaUsers, FaUserTie } from 'react-icons/fa';
+import { HiOutlineBriefcase } from 'react-icons/hi';
 
 const DashboardLayout = () => {
     return (
-        <div>
+        <div className='w-11/12 mx-auto mt-6'>
             <Navbar></Navbar>
-<div className="drawer lg:drawer-open">
+<div className="drawer lg:drawer-open ">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-  <div className="drawer-content">
+  <div className="drawer-content ">
     {/* Page content here */}
    {/* Navbar */}
-    <div className="navbar bg-base-300 w-full lg:hidden">
+    <div className="navbar bg-slate-100 w-full lg:hidden">
       <div className="flex-none lg:hidden">
         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
           <svg
@@ -36,13 +37,26 @@ const DashboardLayout = () => {
   
     </div>
     {/* Page content here */}
-<Outlet></Outlet>
+<div className='bg-slate-100  min-h-full ml-2 rounded-r-2xl rounded-l-lg p-6'>
+  <Outlet></Outlet>
+</div>
   </div>
-  <div className="drawer-side">
+  <div className="drawer-side rounded-l-2xl rounded-r-lg ">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
     <ul className="menu bg-base-200 text-base-content min-h-full w-44 lg:w-80 p-4">
       {/* Sidebar content here */}
       <p className='p-3 lg:text-xl font-bold text-green-600'>Dashboard</p>
+
+      <li>
+  <NavLink
+    to="/dashboard/teacherForm"
+    className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+  >
+     <HiOutlineBriefcase />
+    Apply as Teacher
+  </NavLink>
+</li>
+
      <li>
         <NavLink to="/dashboard/teacher-request" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <FaUserTie />

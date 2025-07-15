@@ -9,6 +9,16 @@ const Navbar = () => {
   console.log(user)
 
    const handleLogOut = () => {
+      Swal.fire({
+    title: 'Are you sure?',
+    text: "You will be logged out!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'log out',
+  }).then((result) => {
+    if (result.isConfirmed) {
     logout().then(() => {
       setUser(null);
       navigate('/');
@@ -23,29 +33,41 @@ const Navbar = () => {
     }).catch((error) => {
       console.log(error);
     });
+        }
+  });
+  
   };
     return (
-        <div>
-            <div className="navbar bg-green-500 flex justify-between shadow-sm ">
-  <div className="">
-    <a className="btn btn-ghost lg:text-4xl font-bold text-green-600">Edu Manage</a>
+        <div className='sticky top-0 z-50'>
+            <div className="navbar  bg-slate-100 rounded-2xl flex justify-between shadow-sm my-4">
+  <div className="flex items-center p-2">
+    <img className='w-16 border-none rounded-full' src="https://i.postimg.cc/Z5FMvDFf/eee.jpg" alt="" />
+    <a className="mx-4 lg:text-4xl font-bold text-green-600">III School</a>
   </div>
-  <div>
+  <div className='flex gap-4 justify-center w-2/3'>
     <NavLink to='/'><button className='btn'>Home</button></NavLink>
+    <NavLink to='/dashboard/all-classes'><button className='btn'>All Classes</button></NavLink>
+     <NavLink to='/dashboard/teacherform'><button className='btn'>Teach on Tripl i Scool</button></NavLink>
   </div>
-  <div className="flex gap-2">
-    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+   <div>
+    
+  </div>
+   <div>
+   
+  </div>
+  <div className="flex gap-6 m-2">
+   
    
 
     {
       user?(<>
-      <button onClick={handleLogOut} className='btn'>Log out</button>
+
          <div className="dropdown dropdown-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle w-16 avatar">
    
-         <div className="w-10 rounded-full ">
-          <img
-            alt="profile picture"
+         <div className="rounded-full ">
+          <img className=''
+            alt="profile"
             src={user?.photoURL} />
         </div>
    
@@ -65,8 +87,9 @@ const Navbar = () => {
    
    
         <li className='font-bold'><NavLink to='/dashboard'>Dashboard</NavLink></li>
-        <li><a>Logout</a></li>
+        <li><a onClick={handleLogOut}>Logout</a></li>
       </ul>
+            <button onClick={handleLogOut} className='btn ml-5'>Log out</button>
     </div>
       </>
        )

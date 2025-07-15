@@ -7,12 +7,15 @@ const RootLayout = () => {
     const {loading}=use(AuthContext);
     console.log(loading)
     return (
-        <div>
+        <div className=' w-11/12 mx-auto mt-6'>
            {
             !loading &&
             <>
              <Navbar></Navbar>
+         <div>
+                
             <Outlet></Outlet>
+         </div>
             </>
            }
         </div>
