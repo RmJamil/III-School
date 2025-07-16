@@ -37,7 +37,7 @@ const useAxiosSecure = () => {
           navigate('/forbidden');
         } else if (status === 401) {
           localStorage.removeItem('access-token');
-          navigate('/login');
+          navigate('/');
         } else if (status === 404) {
           console.warn('Not found:', error.response?.data?.message);
         } else if (status >= 500) {

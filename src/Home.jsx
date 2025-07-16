@@ -5,6 +5,7 @@ import PartnerSlider from './PartnerSlider';
 import PopularClasses from './PopularClasses';
 import FeedbackCarousel from './FeedbackCarousel.jsx';
 import StatsSection from './StatesSection.jsx';
+import Ask from './Ask.jsx';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
                   <FeedbackCarousel/>
                   <StatsSection/>
        <TeachSection></TeachSection>
+       <Ask></Ask>
         </div>
     );
 };

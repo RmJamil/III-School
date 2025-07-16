@@ -50,6 +50,10 @@ export const router = createBrowserRouter([
     element:<AuthLayout/>,
      errorElement: <ErrorPage></ErrorPage>,
     children:[
+        {
+            index:true,
+            Component:Home
+        },
       {
         path:"/register",
        element:<Register></Register>
