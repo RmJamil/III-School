@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
+import Pagination from './Pagination'; // ✅ Make sure this path is correct
 
 const TeacherReq = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
 
-  // Fetch teacher requests with pending/accepted/rejected
-  const { data: requests = [], isLoading } = useQuery({
-    queryKey: ['teacherRequests'],
+  const [page, setPage] = useState(1);
+  const limit = 5; // Items per page
+
+  // Fetch paginated teacher requests
+  const {
+    data: { requests = [], total = 0 } = {},
+    isLoading,
+  } = useQuery({
+    queryKey: ['teacherRequests', page],
     queryFn: async () => {
-      const res = await axiosSecure.get('/teacher-requests');
+      const res = await axiosSecure.get(`/teacher-requests?page=${page}&limit=${limit}`);
       return res.data;
     },
   });
@@ -47,6 +54,10 @@ const TeacherReq = () => {
     rejectMutation.mutate(id);
   };
 
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
+
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
 
   return (
@@ -71,7 +82,7 @@ const TeacherReq = () => {
             const isFinal = req.status === 'accepted' || req.status === 'rejected';
             return (
               <tr key={req._id}>
-                <td>{idx + 1}</td>
+                <td>{(page - 1) * limit + idx + 1}</td>
                 <td>
                   <div className="avatar">
                     <div className="w-12 rounded-full">
@@ -117,6 +128,14 @@ const TeacherReq = () => {
           })}
         </tbody>
       </table>
+
+      {/* ✅ External Pagination Component */}
+      <Pagination
+        currentPage={page}
+        totalItems={total}
+        itemsPerPage={limit}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };

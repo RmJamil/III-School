@@ -55,7 +55,7 @@ const handlePay=(classId)=>{
 
                <button
                onClick={()=>handlePay(classId)}
-  className="btn btn-primary"
+  className="btn bg-green-500 hover:bg-green-600 hover:text-white"
   disabled={hasPaid || isLoading}
 >
   {hasPaid ? 'Already Paid' : 'Pay Now'}

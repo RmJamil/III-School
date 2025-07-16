@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ const AllClasses = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
-const[data,setData]=useState();
+
 
 
 console.log(totalItems)

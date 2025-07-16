@@ -31,11 +31,13 @@ import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 import TeacherRoute from "./TeacherRoute";
 import ClassProgress from "./ClassProgress";
+import ErrorPage from "./ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout/>,
+       errorElement: <ErrorPage></ErrorPage>,
     children:[
         {
             index:true,
@@ -46,6 +48,7 @@ export const router = createBrowserRouter([
   {
     path:"/",
     element:<AuthLayout/>,
+     errorElement: <ErrorPage></ErrorPage>,
     children:[
       {
         path:"/register",
@@ -60,6 +63,7 @@ export const router = createBrowserRouter([
   {
     path:'/dashboard',
     element:<DashboardLayout/>,
+       errorElement: <ErrorPage></ErrorPage>,
 
     children:[
       {

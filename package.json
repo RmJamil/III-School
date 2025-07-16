@@ -18,6 +18,7 @@
     "cloudinary": "^2.7.0",
     "firebase": "^11.10.0",
     "framer-motion": "^12.23.6",
+    "lottie-react": "^2.4.1",
     "react": "^19.1.0",
     "react-awesome-slider": "^4.1.0",
     "react-countup": "^6.5.3",

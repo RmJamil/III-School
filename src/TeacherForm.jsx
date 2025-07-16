@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import useAxiosSecure from './useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
 import { AuthContext } from './AuthProvider';
+import Swal from 'sweetalert2';
 
 
 const TeacherForm = () => {
@@ -22,6 +23,13 @@ const TeacherForm = () => {
     },
     onSuccess: () => {
       reset();
+       Swal.fire({
+            title: "Good job!",
+            text: "successfully posted your application!",
+            icon: "success",
+            timer:1500
+          });
+
     },
   });
 

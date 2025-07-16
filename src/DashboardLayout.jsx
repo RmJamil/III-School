@@ -48,7 +48,9 @@ const DashboardLayout = () => {
     </div>
     {/* Page content here */}
 <div className='bg-slate-100  border border-green-500 min-h-full ml-2 rounded-r-2xl rounded-l-lg p-6'>
-  <Outlet></Outlet>
+  <Outlet>
+
+  </Outlet>
 </div>
   </div>
   <div className="drawer-side border border-green-500 rounded-l-2xl rounded-r-lg ">
