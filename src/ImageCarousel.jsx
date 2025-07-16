@@ -16,7 +16,9 @@ const images = [
 
 const ImageCarousel = () => {
   return (
-    <div className="max-w-4xl mx-auto py-8">
+   <div>
+    <h1 className='text-4xl text-center text-green-500 font-bold my-12'>Comming soon . . .</h1>
+     <div className="max-w-7xl mx-auto py-8">
       <Swiper
         modules={[Navigation, Autoplay]}
         spaceBetween={20}
@@ -36,6 +38,7 @@ const ImageCarousel = () => {
         ))}
       </Swiper>
     </div>
+   </div>
   );
 };
 
