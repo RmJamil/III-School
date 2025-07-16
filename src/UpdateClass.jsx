@@ -164,7 +164,7 @@ try{
           />
         </div>
 
-        <button type="submit" disabled={isSubmitting} className="btn btn-primary">
+        <button type="submit" disabled={isSubmitting} className="btn border border-green-500 hover:bg-green-600 hover:text-white">
           {isSubmitting ? 'Updating...' : 'Update'}
         </button>
       </form>

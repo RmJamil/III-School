@@ -6,6 +6,7 @@ import { NavLink, Outlet } from 'react-router';
 import { FaBookOpen, FaChalkboard, FaChalkboardTeacher, FaCheckCircle, FaPlusCircle, FaUser, FaUserCircle, FaUserClock, FaUsers, FaUserTie } from 'react-icons/fa';
 import { HiOutlineBriefcase } from 'react-icons/hi';
 import useUserRole from './useUserRole';
+import Footer from './Footer';
 
 const DashboardLayout = () => {
 
@@ -46,11 +47,11 @@ const DashboardLayout = () => {
   
     </div>
     {/* Page content here */}
-<div className='bg-slate-100  min-h-full ml-2 rounded-r-2xl rounded-l-lg p-6'>
+<div className='bg-slate-100  border border-green-500 min-h-full ml-2 rounded-r-2xl rounded-l-lg p-6'>
   <Outlet></Outlet>
 </div>
   </div>
-  <div className="drawer-side rounded-l-2xl rounded-r-lg ">
+  <div className="drawer-side border border-green-500 rounded-l-2xl rounded-r-lg ">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
     <ul className="menu bg-base-200 text-base-content min-h-full w-44 lg:w-80 p-4">
       {/* Sidebar content here */}
@@ -95,7 +96,7 @@ const DashboardLayout = () => {
        <li>
         <NavLink to="/dashboard/all-classes" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <FaChalkboardTeacher />
-       Classes to Approve
+       All Classes
         </NavLink>
       </li>
 
@@ -111,13 +112,14 @@ const DashboardLayout = () => {
 
 
 
+
   </>
 
 
 }
 
 
-   { !isRoleLoading && role==='admin' &&
+   { !isRoleLoading && role==='teacher' &&
 
    <>
    <li>
@@ -173,8 +175,8 @@ const DashboardLayout = () => {
   </NavLink>
 </li> */}
 
-
-
+ { !isRoleLoading && role==='student' &&
+<>
       <li>
   <NavLink to="/dashboard/enrolled-classes" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
     <FaBookOpen />
@@ -190,11 +192,14 @@ const DashboardLayout = () => {
     My Profile
   </NavLink>
 </li>
-
+</>
+}
 
     </ul>
   </div>
 </div>
+       
+       <Footer></Footer>
         </div>
     );
 };

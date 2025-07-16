@@ -144,7 +144,7 @@ try{
         </div>
       )}
 
-        <button type="submit" className="btn btn-primary mt-4">Add Class</button>
+        <button type="submit" className="btn bg-green-600 text-white mt-4">Add Class</button>
       </form>
     </div>
   );

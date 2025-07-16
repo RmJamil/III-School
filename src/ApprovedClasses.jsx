@@ -62,18 +62,18 @@ const ApprovedClasses = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {classes.map((classItem) => (
-        <div key={classItem._id} className="card bg-white shadow-xl rounded-2xl p-4">
+        <div key={classItem._id} className="card border border-green-500 bg-white shadow-xl rounded-2xl p-4">
           <img src={classItem.image} alt={classItem.title} className="rounded-xl h-48 w-full object-cover" />
           <div className="mt-4 space-y-2">
             <h2 className="text-xl font-bold">{classItem.title}</h2>
             <p className="text-gray-600">Instructor: {classItem.name}</p>
             <p className="text-gray-700">Price: ${classItem.price}</p>
             <p className="text-gray-500 text-sm">{classItem.description?.slice(0, 80)}...</p>
-            <p className="text-sm font-medium text-blue-600">Total Enrolled: {classItem.students?.length || 0}</p>
+            <p className="text-sm font-medium text-lime-600">Total Enrolled: {classItem.students?.length || 0}</p>
    
             <button
               onClick={() => handleEnroll(classItem)}
-              className=" btn mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition cursor-pointer"
+              className=" btn mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition cursor-pointer"
               disabled={classItem.students?.includes(user?.email)}
             >
               {classItem.students?.includes(user?.email) ? 'Already Enrolled' : 'Enroll now'}

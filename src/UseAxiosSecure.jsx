@@ -1,58 +1,57 @@
 import axios from 'axios';
-import React, { use, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from './AuthProvider';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router'; // Fixed import path
 
-const axiosSecure=axios.create({
-    baseURL:`http://localhost:3000`
-})
+const axiosSecure = axios.create({
+  baseURL: 'http://localhost:3000',
+});
 
-const UseAxiosSecure = () => {
+const useAxiosSecure = () => {
+  const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
 
-     const navigate = useNavigate();
-    const {user}=use(AuthContext);
-    axiosSecure.interceptors.request.use(
-        config=>{
-            config.headers.authorization=`Bearer ${user.accessToken}`
+  // Request Interceptor
+  useEffect(() => {
+    const requestInterceptor = axiosSecure.interceptors.request.use(
+      (config) => {
+        if (user?.accessToken) {
+          config.headers.authorization = `Bearer ${user.accessToken}`;
         }
-    )
+        return config;
+      },
+      (error) => Promise.reject(error)
+    );
 
+    return () => axiosSecure.interceptors.request.eject(requestInterceptor);
+  }, [user]);
 
-      useEffect(() => {
-    const interceptor = axiosSecure.interceptors.response.use(
+  // Response Interceptor
+  useEffect(() => {
+    const responseInterceptor = axiosSecure.interceptors.response.use(
       (response) => response,
       (error) => {
         const status = error.response?.status;
 
- 
         if (status === 403) {
-       
-         
           navigate('/forbidden');
-        } 
-        else if(status===401){
-                localStorage.removeItem('access-token');
+        } else if (status === 401) {
+          localStorage.removeItem('access-token');
           navigate('/login');
-        }
-        else if (status >= 500) {
-          console.error('Server Error:', error.response?.data?.message || error.message);
-    
         } else if (status === 404) {
           console.warn('Not found:', error.response?.data?.message);
+        } else if (status >= 500) {
+          console.error('Server Error:', error.response?.data?.message || error.message);
         }
 
-        return Promise.reject(error); 
+        return Promise.reject(error);
       }
     );
 
- 
-    return () => {
-      axiosSecure.interceptors.response.eject(interceptor);
-    };
+    return () => axiosSecure.interceptors.response.eject(responseInterceptor);
   }, [navigate]);
-    return axiosSecure;
-    
 
+  return axiosSecure;
 };
 
-export default UseAxiosSecure;
+export default useAxiosSecure;

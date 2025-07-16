@@ -56,8 +56,10 @@ const MyClasses = () => {
       {
         isLoading && <span className="loading loading-bars loading-xl"></span>
       }
-      <h2 className="text-2xl font-bold mb-4">My Classes</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <h2 className="text-2xl font-bold mb-4">My Classes :</h2>
+ {
+  classes.length!=0?(
+     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {classes.map((classItem) => (
           <div key={classItem._id} className="card bg-base-100 shadow-xl border">
             <figure>
@@ -84,7 +86,7 @@ const MyClasses = () => {
                 <Link to={`/dashboard/updateclass/${classItem._id}`}>
                 <button
             
-                  className="btn btn-sm btn-outline btn-primary"
+                  className="btn border border-green-500 hover:bg-green-600 hover:text-white"
                 >
                   Update
                 </button>
@@ -92,14 +94,14 @@ const MyClasses = () => {
 
                 <button
                   onClick={() => handleDelete(classItem._id)}
-                  className="btn btn-sm btn-outline btn-error"
+                  className="btn border border-red-500 hover:bg-red-600 hover:text-white"
                 >
                   Delete
                 </button>
 
                 <Link
-                  to={`/dashboard/my-class/${classItem._id}`}
-                  className={`btn btn-sm btn-outline ${
+                  to={`/dashboard/classprogress/${classItem._id}`}
+                  className={`btn border border-green-500 hover:bg-green-600 hover:text-white ${
                     classItem.status === 'accepted' ? 'btn-info' : 'btn-disabled'
                   }`}
                 >
@@ -111,6 +113,11 @@ const MyClasses = () => {
         ))}
       </div>
 
+  ):
+  (
+    <p className='text-center lg:my-12 lg:text-6xl font-bold text-orange-600'>You have not posted any classes yet !</p>
+  )
+ }
       {/* Optional: Update modal here */}
      
     </div>

@@ -42,15 +42,15 @@ const Navbar = () => {
   };
     return (
         <div className='sticky top-0 z-50'>
-            <div className="navbar  bg-slate-100 rounded-2xl flex justify-between shadow-sm my-4">
+            <div className="navbar  bg-blue-200 rounded-2xl flex justify-between shadow-sm my-4">
   <div className="flex items-center p-2">
     <img className='w-16 border-none rounded-full' src="https://i.postimg.cc/Z5FMvDFf/eee.jpg" alt="" />
     <a className="mx-4 lg:text-4xl font-bold text-green-600">III School</a>
   </div>
   <div className='flex gap-4 justify-center w-2/3'>
-    <NavLink to='/' ><button className={`btn `}>Home</button></NavLink>
-    <NavLink to='/dashboard/approvedclasses'><button className='btn'>All Classes</button></NavLink>
-     <NavLink to='/dashboard/teacherform'><button className='btn'>Teach on Triple i School</button></NavLink>
+    <NavLink to='/' ><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Home</button></NavLink>
+    <NavLink to='/dashboard/approvedclasses'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>All Classes</button></NavLink>
+     <NavLink to='/dashboard/teacherform'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Teach on Triple i School</button></NavLink>
   </div>
    <div>
     
@@ -92,15 +92,15 @@ const Navbar = () => {
         <li className='font-bold'><NavLink to='/dashboard'>Dashboard</NavLink></li>
         <li><a onClick={handleLogOut}>Logout</a></li>
       </ul>
-            <button onClick={handleLogOut} className='btn ml-5'>Log out</button>
+            <button onClick={handleLogOut} className='btn ml-5 bg-green-500 hover:bg-green-600 hover:text-white'>Log out</button>
     </div>
       </>
        )
       :
       (
   <>
-      <NavLink to='/login'> <button className='btn'>  Sign In</button></NavLink>
-      <NavLink to='/register'><button className='btn'>Sign up</button></NavLink>
+      <NavLink to='/login'> <button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>  Sign In</button></NavLink>
+      <NavLink to='/register'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Sign up</button></NavLink>
       </>
       )
     }

@@ -27,6 +27,10 @@ import MyEnrolledClassDetails from "./MyEnrolledClassDetails";
 import MyProfile from "./MyProfile";
 import UseAxiosSecure from "./useAxiosSecure";
 import Forbidden from "./Forbidden";
+import AdminRoute from "./AdminRoute";
+import PrivateRoute from "./PrivateRoute";
+import TeacherRoute from "./TeacherRoute";
+import ClassProgress from "./ClassProgress";
 
 export const router = createBrowserRouter([
   {
@@ -60,11 +64,11 @@ export const router = createBrowserRouter([
     children:[
       {
         path:'users',
-        element:<Users/>
+        element:<AdminRoute><Users/></AdminRoute>
       },
       {
         path:'teacher-request',
-        element:<TeacherReq/>
+        element:<AdminRoute><TeacherReq/></AdminRoute> 
       },
       {
         path:'pending-teachers',
@@ -72,7 +76,7 @@ export const router = createBrowserRouter([
       },
       {
         path:'all-classes',
-        element:<AllClasses/>,
+        element: <AdminRoute><AllClasses/></AdminRoute> ,
             loader: async () => {
       const res = await fetch('http://localhost:3000/classCount');
     return res.json(); 
@@ -81,16 +85,16 @@ export const router = createBrowserRouter([
 
       {
         path:'teacherform',
-        element:<TeacherForm/>
+        element:<PrivateRoute><TeacherForm/></PrivateRoute> 
 
       },
       {
         path:'addclass',
-        element:<AddClass/>
+        element:<TeacherRoute><AddClass/></TeacherRoute>
       },
       {
         path:'my-classes',
-        element:<MyClasses/>,
+        element:<TeacherRoute><MyClasses/></TeacherRoute>,
       },
       {
         path:'updateclass/:classid',
@@ -102,7 +106,7 @@ export const router = createBrowserRouter([
     },
     {
       path:'approvedclasses',
-      element:<ApprovedClasses/>
+      element:<PrivateRoute><ApprovedClasses/></PrivateRoute> 
     },
     {
       path:'progress/:id',
@@ -111,6 +115,11 @@ export const router = createBrowserRouter([
     const res = await fetch(`http://localhost:3000/updateclasses/${params.id}`);
     return res.json(); 
       }
+    },
+    {
+      path:'classprogress/:id',
+      element:<ClassProgress/>
+
     },
     {
       path:'classdetails/:classid',

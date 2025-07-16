@@ -124,7 +124,7 @@ const TeacherForm = () => {
 
         {/* Submit Button */}
         <div>
-          <button type="submit" className="btn btn-primary w-full" disabled={isPending}>
+          <button type="submit" className="btn bg-green-500 hover:bg-green-600 hover:text-white w-full" disabled={isPending}>
             {isPending ? 'Submitting...' : 'Submit for Review'}
           </button>
           {isSuccess && <p className="text-green-500 mt-2">Request submitted successfully!</p>}

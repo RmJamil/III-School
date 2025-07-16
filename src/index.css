@@ -23,5 +23,10 @@
 }
 
 .active{
-  border-bottom: 2px solid green;
+  border-bottom: 2px solid orange;
+}
+
+/* Add to global styles or the component */
+.ticker-swiper .swiper-wrapper {
+  transition-timing-function: linear !important;
 }

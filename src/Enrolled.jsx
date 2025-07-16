@@ -64,7 +64,11 @@ const handleContinue=(id)=>{
   if (isLoading) return <p className="text-center py-10">Loading...</p>;
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+   <div>
+    <h1 className='text-center text-4xl font-bold text-green-500'>Your enrolled classes</h1>
+    { payments.length!=0?
+      (<>
+       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {payments.map((payment) => (
         <div key={payment.transactionId} className="card bg-base-100 shadow-xl p-4 border">
           <div className="card-body">
@@ -90,6 +94,14 @@ const handleContinue=(id)=>{
         </div>
       ))}
     </div>
+      </>):
+      (
+       <div className='flex justify-center items-center bg-blue-100 my-4 rounded-2xl h-[60vh]'>
+         <p className='text-center text-3xl font-bold text-orange-500'>You have not enrolled any class yet</p>
+       </div>
+      )
+    }
+   </div>
   );
 };
 

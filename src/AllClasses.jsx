@@ -24,13 +24,13 @@ console.log(totalItems)
 
  
   // Fetch all classes
-  const { data: classes = [], isLoading } = useQuery({
-    queryKey: ['all-classes'],
-    queryFn: async () => {
-      const res = await axiosSecure.get('/classes');
-      return res.data;
-    },
-  });
+  // const { data: classes = []} = useQuery({
+  //   queryKey: ['all-classes'],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get('/classes');
+  //     return res.data;
+  //   },
+  // });
 
   // Approve or reject mutation
   const statusMutation = useMutation({
@@ -53,20 +53,21 @@ console.log(totalItems)
       if (result.isConfirmed) {
         statusMutation.mutate({ id, status });
         Swal.fire('Updated!', `Class marked as ${status}.`, 'success');
+          refetch()
       }
+      
     });
+ 
   };
 
-    useEffect(() => {
-    const fetchData = async () => {
-      const res = await axiosSecure.get(`/classes?page=${currentPage}&limit=${itemsPerPage}`);
-      setData(res.data); // your items
-       // total count from server
-    };
+const { data: paginatedClasses = [], isLoading, refetch } = useQuery({
+  queryKey: ['classes', currentPage],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/classes?page=${currentPage}&limit=${itemsPerPage}`);
+    return res.data;
+  }
+});
 
-    fetchData();
-  }, [currentPage,axiosSecure]);
-console.log(data);
 
   if (isLoading) return <p className="text-center py-10">Loading classes...</p>;
 
@@ -87,7 +88,7 @@ console.log(data);
           </tr>
         </thead>
         <tbody>
-          {data?.map((classItem, index) => (
+          {paginatedClasses?.map((classItem, index) => (
             <tr key={classItem._id} className=' lg:h-34'>
               <td>  {(index + 1) + (currentPage - 1) * itemsPerPage}</td>
               <td>{classItem.title}</td>
@@ -141,7 +142,7 @@ console.log(data);
                </div>
               </td>
               <td>
-       <Link to={classItem.status == 'accepted' && `/dashboard/progress/${classItem._id}`}>
+       <Link to={classItem.status == 'accepted' && `/dashboard/classprogress/${classItem._id}`}>
                 <button
                   className="btn btn-info"
                   disabled={classItem.status !== 'accepted'}

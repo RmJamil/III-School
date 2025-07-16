@@ -119,7 +119,9 @@ const isSubmitted = (assignmentId) =>
     className:enrolledClass.title,
     classId,
     user_email:user?.email,
-    user_name:user?.displayName
+    user_name:user?.displayName,
+    image:user?.photoURL
+
   };
 
   try {
