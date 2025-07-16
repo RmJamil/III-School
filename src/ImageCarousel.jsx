@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 
 const images = [
-  'https://via.placeholder.com/300x200?text=Image+1',
+  'https://i.postimg.cc/CL1VtScg/of.jpg',
   'https://via.placeholder.com/300x200?text=Image+2',
   'https://via.placeholder.com/300x200?text=Image+3',
   'https://via.placeholder.com/300x200?text=Image+4',
