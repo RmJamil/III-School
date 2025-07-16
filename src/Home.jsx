@@ -6,6 +6,7 @@ import PopularClasses from './PopularClasses';
 import FeedbackCarousel from './FeedbackCarousel.jsx';
 import StatsSection from './StatesSection.jsx';
 import Ask from './Ask.jsx';
+import ImageCarousel from './ImageCarousel.jsx';
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
                   <PopularClasses/>
                   <FeedbackCarousel/>
                   <StatsSection/>
+                  <ImageCarousel></ImageCarousel>
        <TeachSection></TeachSection>
        <Ask></Ask>
         </div>
