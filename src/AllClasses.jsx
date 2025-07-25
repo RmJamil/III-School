@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import useAxiosSecure from './useAxiosSecure';
 import Swal from 'sweetalert2';
@@ -9,30 +9,11 @@ import Pagination from './Pagination';
 const AllClasses = () => {
   const axiosSecure = useAxiosSecure();
   const queryClient = useQueryClient();
-// const totalItems=useLoaderData();
-// console.log(totalItems)
- const { totalItems } = useLoaderData();
-  //  const [data, setData] = useState([]);
+  const { totalItems } = useLoaderData();
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
 
-
-
-
-console.log(totalItems)
-
-
- 
-  // Fetch all classes
-  // const { data: classes = []} = useQuery({
-  //   queryKey: ['all-classes'],
-  //   queryFn: async () => {
-  //     const res = await axiosSecure.get('/classes');
-  //     return res.data;
-  //   },
-  // });
-
-  // Approve or reject mutation
   const statusMutation = useMutation({
     mutationFn: async ({ id, status }) => {
       const res = await axiosSecure.patch(`/classes/status/${id}`, { status });
@@ -53,61 +34,139 @@ console.log(totalItems)
       if (result.isConfirmed) {
         statusMutation.mutate({ id, status });
         Swal.fire('Updated!', `Class marked as ${status}.`, 'success');
-          refetch()
+        refetch();
       }
-      
     });
- 
   };
 
-const { data: paginatedClasses = [], isLoading, refetch } = useQuery({
-  queryKey: ['classes', currentPage],
-  queryFn: async () => {
-    const res = await axiosSecure.get(`/classes?page=${currentPage}&limit=${itemsPerPage}`);
-    return res.data;
-  }
-});
-
+  const { data: paginatedClasses = [], isLoading, refetch } = useQuery({
+    queryKey: ['classes', currentPage],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/classes?page=${currentPage}&limit=${itemsPerPage}`);
+      return res.data;
+    },
+  });
 
   if (isLoading) return <p className="text-center py-10">Loading classes...</p>;
 
   return (
-    <div className="p-6 overflow-x-auto max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">All Classes</h2>
-      <table className="table w-full border">
-        <thead className="">
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Image</th>
-            <th>Email</th>
-            <th>Description</th>
-            <th>Status</th>
-            <th className='text-center'>Actions</th>
-            <th>Progress</th>
-          </tr>
-        </thead>
-        <tbody>
-          {paginatedClasses?.map((classItem, index) => (
-            <tr key={classItem._id} className=' lg:h-34'>
-              <td>  {(index + 1) + (currentPage - 1) * itemsPerPage}</td>
-              <td>{classItem.title}</td>
-              <td>
+    <div className="lg:p-4  w-full lg:max-w-7xl mx-auto">
+      <div className="text-center bg-blue-100 p-4 rounded-2xl mb-6">
+        <h2 className="text-2xl text-green-500 font-bold mb-2">All added Classes by teachers</h2>
+        <h2 className="text-lg font-bold">Need review from admin</h2>
+      </div>
+
+      {/* TABLE VIEW for lg and up */}
+      <div className="hidden lg:block w-full overflow-x-auto">
+        <table className="table w-full border text-sm">
+          <thead className="bg-gray-100">
+            <tr>
+              <th>#</th>
+              <th>Title</th>
+              <th>Image</th>
+              <th>Email</th>
+              <th>Description</th>
+              <th>Status</th>
+              <th className="text-center">Actions</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+          <tbody>
+            {paginatedClasses.map((classItem, index) => (
+              <tr key={classItem._id} className="lg:h-34">
+                <td>{(index + 1) + (currentPage - 1) * itemsPerPage}</td>
+                <td>{classItem.title}</td>
+                <td>
+                  <img
+                    src={classItem.image || '/default-class.jpg'}
+                    alt={classItem?.title}
+                    className="w-20 h-14 rounded object-cover"
+                  />
+                </td>
+                <td className="break-all max-w-[150px]">{classItem.email}</td>
+                <td>
+                  {classItem.description.length > 50
+                    ? classItem.description.slice(0, 50) + '...'
+                    : classItem.description}
+                </td>
+                <td>
+                  <span
+                    className={`badge ${
+                      classItem.status === 'pending'
+                        ? 'badge-warning'
+                        : classItem.status === 'accepted'
+                        ? 'badge-success'
+                        : 'badge-error'
+                    }`}
+                  >
+                    {classItem.status}
+                  </span>
+                </td>
+                <td>
+                  <div className="flex gap-2 justify-center items-center">
+                    <button
+                      onClick={() => handleStatusChange(classItem._id, 'accepted')}
+                      disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
+                      className="btn btn-sm btn-success"
+                      title="Approve"
+                    >
+                      <FaCheck className="mr-1" /> Approve
+                    </button>
+
+                    <button
+                      onClick={() => handleStatusChange(classItem._id, 'rejected')}
+                      disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
+                      className="btn btn-sm btn-error"
+                      title="Reject"
+                    >
+                      <FaTimes className="mr-1" /> Reject
+                    </button>
+                  </div>
+                </td>
+                <td>
+                  <Link
+                    to={classItem.status === 'accepted' && `/dashboard/classprogress/${classItem._id}`}
+                  >
+                    <button
+                      className="btn btn-sm btn-info"
+                      disabled={classItem.status !== 'accepted'}
+                      title="Progress"
+                    >
+                      Progress <FaForward className="ml-1" />
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* CARD VIEW for small and medium screens */}
+      <div className="block lg:hidden space-y-4">
+        {paginatedClasses.map((classItem) => (
+          <div
+            key={classItem._id}
+            className="border rounded-lg p-4 shadow bg-white"
+          >
+            <div className="flex items-center space-x-4">
+              <div className="flex-shrink-0">
                 <img
                   src={classItem.image || '/default-class.jpg'}
                   alt={classItem?.title}
-                  className="w-12 lg:w-24 lg:h-16 h-9 rounded object-cover"
+                  className="w-20 h-14 rounded object-cover"
                 />
-              </td>
-              <td>{classItem.email}</td>
-              <td>
-                {classItem.description.length > 50
-                  ? classItem.description.slice(0, 50) + '...'
-                  : classItem.description}
-              </td>
-              <td className=''>
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold">Class Name : {classItem.title}</h3>
+                <p className="text-sm text-gray-600 break-words max-w-xs">Added by : {classItem.email}</p>
+                <p className="text-sm mt-1">
+                 Descriptions :  {classItem.description.length > 80
+                    ? classItem.description.slice(0, 80) + '...'
+                    : classItem.description}
+                </p>
                 <span
-                  className={`badge ${
+                  className={`badge mt-2 ${
                     classItem.status === 'pending'
                       ? 'badge-warning'
                       : classItem.status === 'accepted'
@@ -117,53 +176,53 @@ const { data: paginatedClasses = [], isLoading, refetch } = useQuery({
                 >
                   {classItem.status}
                 </span>
-              </td>
-              <td className="flex gap-2 justify-center items-center  lg:my-12 ">
-               <div className=' flex gap-2'>
-                 <button
+              </div>
+            </div>
+
+            <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+              <div className="flex gap-2">
+                <button
                   onClick={() => handleStatusChange(classItem._id, 'accepted')}
                   disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
-                  className="btn btn-sm btn-success"
+                  className="btn btn-sm btn-success flex items-center"
                   title="Approve"
                 >
-                  <FaCheck />
-                  Approve
+                  <FaCheck className="mr-1" /> Approve
                 </button>
-
                 <button
                   onClick={() => handleStatusChange(classItem._id, 'rejected')}
                   disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
-                  className="btn btn-sm btn-error"
+                  className="btn btn-sm btn-error flex items-center"
                   title="Reject"
                 >
-                  <FaTimes />
-                  Reject
+                  <FaTimes className="mr-1" /> Reject
                 </button>
-               </div>
-              </td>
-              <td>
-       <Link to={classItem.status == 'accepted' && `/dashboard/classprogress/${classItem._id}`}>
+              </div>
+              <Link
+                to={classItem.status === 'accepted' && `/dashboard/classprogress/${classItem._id}`}
+              >
                 <button
-                  className="btn btn-info"
+                  className="btn btn-sm btn-info flex items-center justify-center"
                   disabled={classItem.status !== 'accepted'}
                   title="Progress"
                 >
-                    Progress
-                  <FaForward />
+                  Progress <FaForward className="ml-1" />
                 </button>
-       </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              </Link>
+            </div>
+          </div>
+        ))}
+      </div>
 
+      {/* Pagination */}
+      <div className="mt-6">
         <Pagination
-        currentPage={currentPage}
-        totalItems={totalItems}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPage}
-      />
+          currentPage={currentPage}
+          totalItems={totalItems}
+          itemsPerPage={itemsPerPage}
+          onPageChange={setCurrentPage}
+        />
+      </div>
     </div>
   );
 };

@@ -34,11 +34,15 @@ const ApprovedClasses = () => {
   const { classes = [], total } = classData;
 
   return (
-    <div className="p-4">
+    <div className="lg:p-4 p-1">
+      <div className='text-center text-3xl font-bold text-green-600'>
+        <p>All Available classes are below <br/></p>
+      <p> Enrole now !</p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
         
         {classes.map((classItem) => (
-          <div key={classItem._id} className="card border border-green-500 bg-white shadow-xl rounded-2xl p-4">
+          <div key={classItem._id} className="card border border-green-500 bg-white shadow-xl rounded-2xl p-1 lg:p-4">
             <img
               src={classItem.image}
               alt={classItem.title}

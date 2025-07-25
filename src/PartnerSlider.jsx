@@ -22,7 +22,7 @@ const settings = {
   speed: 2500, // faster = smoother
   slidesToShow: 8,
   slidesToScroll: 1,
-  autoplay: false,
+  autoplay: true,
   autoplaySpeed: 0, // ⬅️ this makes it scroll continuously
   cssEase: "linear", // ⬅️ smooth linear scroll
   arrows: false,
@@ -35,8 +35,8 @@ const settings = {
 };
   return (
     <section >
-         <h2 className="text-4xl text-green-500 font-bold text-center mt-24 mb-6">Our Partners</h2>
-      <div className="py-2 bg-blue-50 my-6">
+         <h2 className="text-4xl  text-green-500 font-bold text-center mt-24 mb-6">Our Partners</h2>
+      <div className="py-2 rounded-2xl bg-blue-50 my-6">
        
       <div className="max-w-11/12 mx-auto px-2">
         <Slider {...settings}>

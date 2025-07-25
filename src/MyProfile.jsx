@@ -22,7 +22,9 @@ const MyProfile = () => {
   const { name, email, photo, role, phone } = userInfo;
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-slate-100 rounded-xl shadow-md space-y-4 mt-10">
+    <div>
+      <p className='text-3xl text-center font-bold text-orange-500'>{name}'s Profile</p>
+      <div className="max-w-md mx-auto p-6 bg-blue-200 rounded-xl shadow-md space-y-4 mt-10">
       <div className="flex items-center space-x-4">
         <img
           src={photo || '/default-user.png'}
@@ -39,6 +41,7 @@ const MyProfile = () => {
         <p><span className="text-xl font-semibold">Email:</span> {email}</p>
         <p><span className="font-semibold">Phone:</span> {phone || 'N/A'}</p>
       </div>
+    </div>
     </div>
   );
 };

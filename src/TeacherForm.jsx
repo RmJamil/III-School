@@ -48,9 +48,10 @@ const TeacherForm = () => {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white shadow-md rounded p-6 mt-8">
-      <h2 className="text-2xl font-bold mb-4">Apply for Teacher Position</h2>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className="">
+      <h2 className="text-3xl font-bold text-center text-green-600 mb-4">Apply for Teacher Position</h2>
+  <div className="max-w-xl mx-auto bg-white shadow-md rounded p-6 mt-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
         {/* Name (auto-filled) */}
         <div>
@@ -138,6 +139,7 @@ const TeacherForm = () => {
           {isSuccess && <p className="text-green-500 mt-2">Request submitted successfully!</p>}
         </div>
       </form>
+  </div>
     </div>
   );
 };

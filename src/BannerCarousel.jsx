@@ -13,8 +13,8 @@ const BannerCarousel = () => {
 
   return (
     <div className="max-w-full bg-blue-50 py-12 my-6 mx-auto rounded-lg overflow-hidden shadow-lg">
-       <h1 className='text-center text-5xl font-bold text-green-500'>Learning has no limit</h1>
-        <h1 className='text-center text-5xl font-bold text-orange-500 mb-8'>We set our limit to infinity</h1>
+       <h1 className='text-center lg:text-5xl font-bold text-green-500'>Learning has no limit</h1>
+        <h1 className='text-center lg:text-5xl font-bold text-orange-500 mb-8'>We set our limit to infinity</h1>
         
       <Swiper
         modules={[Autoplay, Pagination]}

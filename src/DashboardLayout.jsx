@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { use } from 'react';
 import Users from './Users';
 import Navbar from './Navbar';
 import './index.css';
@@ -7,26 +7,31 @@ import { FaBookOpen, FaChalkboard, FaChalkboardTeacher, FaCheckCircle, FaPlusCir
 import { HiOutlineBriefcase } from 'react-icons/hi';
 import useUserRole from './useUserRole';
 import Footer from './Footer';
+import { AuthContext } from './AuthProvider';
 
 const DashboardLayout = () => {
 
    const { role, isRoleLoading } = useUserRole();
-
+   const {user}=use(AuthContext);
   if (isRoleLoading){
     <div className='flex justify-center items-center'>
        return <span className="loading loading-bars loading-xl"></span>;
     </div>
   }
     return (
-        <div className='w-11/12 mx-auto mt-6'>
+        <div className='lg:w-11/12 lg:mx-auto mx-2 mt-6'>
             <Navbar></Navbar>
+            <div className='text-center hidden lg:block text-green-500 font-bold my-8 bg-blue-100 p-5 rounded-2xl'>
+              <p className='text-3xl'>{user?.displayName}'s Dashboard </p>
+              <p className='text-lg'>Role: <span className='text-orange-500 italic'>{role}</span></p>
+            </div>
 <div className="drawer lg:drawer-open ">
   <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content ">
     {/* Page content here */}
    {/* Navbar */}
-    <div className="navbar bg-slate-100 w-full lg:hidden">
-      <div className="flex-none lg:hidden">
+    <div className="navbar bg-slate-100 w-full lg:hidden my-4">
+      <div className="flex-none lg:hidden ">
         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -47,15 +52,15 @@ const DashboardLayout = () => {
   
     </div>
     {/* Page content here */}
-<div className='bg-slate-100  border border-green-500 min-h-full ml-2 rounded-r-2xl rounded-l-lg p-6'>
+<div className='bg-slate-100  border border-green-500 min-h-full lg:ml-2  rounded-r-2xl rounded-l-lg p-2 lg:p-6'>
   <Outlet>
 
   </Outlet>
 </div>
   </div>
-  <div className="drawer-side border border-green-500 rounded-l-2xl rounded-r-lg ">
+  <div className="drawer-side border border-green-500 rounded-l-2xl  rounded-r-lg ">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-    <ul className="menu bg-base-200 text-base-content min-h-full w-44 lg:w-80 p-4">
+    <ul className="menu bg-base-200 text-base-content min-h-full rounded-r-2xl mt-56 lg:mt-0 w-44 lg:w-80 ">
       {/* Sidebar content here */}
       <p className='p-3 lg:text-xl font-bold text-green-600'>Dashboard</p>
 
@@ -98,7 +103,7 @@ const DashboardLayout = () => {
        <li>
         <NavLink to="/dashboard/all-classes" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <FaChalkboardTeacher />
-       All Classes
+       All Classes to review
         </NavLink>
       </li>
 
@@ -201,7 +206,9 @@ const DashboardLayout = () => {
   </div>
 </div>
        
-       <Footer></Footer>
+   <div className='my-34 '>
+        <Footer></Footer>
+   </div>
         </div>
     );
 };

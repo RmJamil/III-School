@@ -4,6 +4,7 @@ import app from '../firebase.init';
 export const AuthContext =createContext();
 import { IoIosStar } from 'react-icons/io';
 
+
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null);   
@@ -33,6 +34,7 @@ useEffect(()=>{
 
 const logout=()=>{
      setLoading(true);
+
     return signOut(auth);
 }
 const googleSignIn=(provider)=>{

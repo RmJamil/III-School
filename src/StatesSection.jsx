@@ -20,10 +20,12 @@ const StatsSection = () => {
   if (isLoading) return <p className="text-center py-10">Loading statistics...</p>;
 
   return (
-  <div>
-    <h1 className='text-center text-5xl font-bold text-green-500 mt-4 lg:mt-24'>Statistics</h1>
-      <section className="bg-blue-50 my-12 py-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4">
+ 
+ 
+      <section className="bg-blue-50 my-12 rounded-2xl py-8">
+           <h1 className='text-center text-5xl font-bold text-green-500 my-4 mb-16'>Statistics</h1>
+        <div>
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4">
         
         {/* Left: Stats Cards */}
         <div className="grid grid-cols-1 gap-6 w-full md:w-1/2">
@@ -70,8 +72,10 @@ const StatsSection = () => {
           />
         </div>
       </div>
+        </div>
+      
     </section>
-  </div>
+
   );
 };
 

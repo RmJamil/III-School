@@ -4,6 +4,7 @@ import useAxiosSecure from './useAxiosSecure';
 import Swal from 'sweetalert2';
 
 import { AuthContext } from './AuthProvider';
+import { useNavigate } from 'react-router';
 
 const AddClass = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -11,7 +12,10 @@ const AddClass = () => {
    const [uploadedUrl, setUploadedUrl] = useState('');
     const [loading, setLoading] = useState(false);
   const { user } = use(AuthContext); // Get logged in user
-  console.log(uploadedUrl)
+  console.log(uploadedUrl);
+
+  const navigate=useNavigate();
+
 
   const onSubmit = async (data) => {
     const classData = {
@@ -43,13 +47,14 @@ console.log(uploadedUrl)
         text: 'Failed to add class. Please try again.',
       });
     }
+    navigate('/');
   };
 
   const handleImage = async (e) => {
   const formData = new FormData();
   formData.append("image", e.target.files[0]);
 try{
-   const res = await fetch("http://localhost:3000/api/upload", {
+   const res = await fetch("https://edu-manage-server-chi.vercel.app/api/upload", {
     method: "POST",
     body: formData,
   });
@@ -73,9 +78,12 @@ try{
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-6">Add New Class</h2>
+     <div className='bg-blue-100 text-center rounded-2xl p-5 my-6'>
+       <h2 className="text-3xl font-bold text-green-500 ">Add New Class</h2>
+     </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <div className='bg-blue-100 p-12 rounded-2xl'>
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
         <div>
           <label className="label">Title</label>
           <input
@@ -144,8 +152,11 @@ try{
         </div>
       )}
 
-        <button type="submit" className="btn bg-green-600 text-white mt-4">Add Class</button>
+        <div className='text-right'>
+          <button type="submit" className="btn bg-green-600  text-white mt-4">Add Class</button>
+        </div>
       </form>
+    </div>
     </div>
   );
 };

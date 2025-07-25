@@ -16,8 +16,9 @@ const Home = () => {
                   <PopularClasses/>
                   <FeedbackCarousel/>
                   <StatsSection/>
-                  <ImageCarousel></ImageCarousel>
+                 
        <TeachSection></TeachSection>
+        <ImageCarousel></ImageCarousel>
        <Ask></Ask>
         </div>
     );
