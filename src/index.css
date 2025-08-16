@@ -30,3 +30,8 @@
 .ticker-swiper .swiper-wrapper {
   transition-timing-function: linear !important;
 }
+.dark-mode {
+  background-color: 	black;
+  color: white;
+}
+

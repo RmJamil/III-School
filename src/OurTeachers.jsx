@@ -32,7 +32,7 @@ const OurTeachers = () => {
           <img
             src={teacher.photo}
             alt={teacher.name}
-            className="w-full  object-cover"
+            className="w-full h-56 object-cover"
           />
           <div className="p-4">
             <h3 className="text-xl font-bold">{teacher.name}</h3>

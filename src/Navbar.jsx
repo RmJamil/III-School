@@ -1,13 +1,38 @@
-import React, { useRef, useState, useContext } from 'react';
+import React, { useRef, useState, useContext, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
+import { MdDarkMode, MdOutlineDarkMode } from 'react-icons/md';
 
 const Navbar = () => {
   const { user, setUser, logout } = useContext(AuthContext);
   const navigate = useNavigate();
   const dropdownRef = useRef();
   const [isMenuOpen, setIsMenuOpen] = useState(false); // 🔥 Toggle for mobile menu
+
+ const [dark, setDark] = useState(true);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode !== null) {
+      setDark(savedMode === 'true');
+    }
+  }, []);
+
+  // Apply dark mode class & save to localStorage
+  useEffect(() => {
+    if (dark) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    localStorage.setItem('darkMode', dark);
+  }, [dark]);
+
+  const handleDark = () => {
+    setDark((prev) => !prev);
+  };
+
 
   const closeDropdown = () => {
     if (dropdownRef.current) {
@@ -123,7 +148,9 @@ const Navbar = () => {
          
             </>
           )}
+           {dark ? <MdDarkMode className='ml-4 cursor-pointer p-1 hover:p-0' onClick={handleDark} size={40} /> : <MdOutlineDarkMode className='ml-4 cursor-pointer  p-1 hover:p-0' onClick={handleDark} size={40} />}
         </div>
+        
       </div>
 
       {/* Mobile Menu */}
@@ -131,6 +158,7 @@ const Navbar = () => {
            
 
         <div className="lg:hidden flex flex-col gap-2 px-4 pb-4">
+           {dark ? <MdDarkMode className='ml-4 cursor-pointer p-1 hover:p-0' onClick={handleDark} size={40} /> : <MdOutlineDarkMode className='ml-4 cursor-pointer  p-1 hover:p-0' onClick={handleDark} size={40} />}
           <NavLink to='/' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>Home</button></NavLink>
           <NavLink to='/ourTeachers'><button className='btn w-full'>Our Teachers</button></NavLink>
           <NavLink to='/freeClasses'><button className='btn w-full'>Free Classes</button></NavLink>
