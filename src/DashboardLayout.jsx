@@ -19,7 +19,7 @@ const DashboardLayout = () => {
     </div>
   }
     return (
-        <div className='lg:w-11/12 lg:mx-auto mx-2 mt-6'>
+        <div className='mt-6'>
             <Navbar></Navbar>
             <div className='text-center hidden lg:block text-green-500 font-bold my-8 bg-blue-100 p-5 rounded-2xl'>
               <p className='text-3xl'>{user?.displayName}'s Dashboard </p>

@@ -8,12 +8,12 @@ const RootLayout = () => {
     const {loading}=use(AuthContext);
     console.log(loading)
     return (
-        <div className=' w-11/12 mx-auto mt-6'>
+        <div className=' '>
            {
             !loading &&
             <>
              <Navbar></Navbar>
-         <div>
+         <div className='w-11/12 mx-auto mt-6'>
                 
             <Outlet></Outlet>
          </div>

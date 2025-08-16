@@ -58,7 +58,7 @@ const UpdateClass = () => {
   const formData = new FormData();
   formData.append("image", e.target.files[0]);
 try{
-   const res = await fetch("https://edu-manage-server-chi.vercel.app/api/upload", {
+   const res = await fetch("http://localhost:3000/api/upload", {
     method: "POST",
     body: formData,
   });
