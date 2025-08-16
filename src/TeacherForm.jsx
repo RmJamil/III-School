@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 
 
 const TeacherForm = () => {
-  const { user } =use(AuthContext) ; // Assuming user = { displayName, email, photoURL }
+  const { user } =use(AuthContext) ; 
   const axiosSecure = useAxiosSecure();
   const {
     register,
