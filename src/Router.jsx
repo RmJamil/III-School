@@ -32,6 +32,8 @@ import PrivateRoute from "./PrivateRoute";
 import TeacherRoute from "./TeacherRoute";
 import ClassProgress from "./ClassProgress";
 import ErrorPage from "./ErrorPage";
+import OurTeachers from "./OurTeachers";
+import FreeClasses from "./FreeClasses";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
         {
             index:true,
             Component:Home
+        },
+        {
+          path:"/ourTeachers",
+          element:<OurTeachers/>
+        },
+         {
+          path:"/freeClasses",
+          element:<FreeClasses/>
         }
     ]
   },

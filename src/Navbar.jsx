@@ -68,6 +68,9 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex gap-4 justify-center w-2/3">
           <NavLink to='/'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Home</button></NavLink>
+          <NavLink to='/ourTeachers'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Our Teachers</button></NavLink>
+          <NavLink to='/freeClasses'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Free Classes</button></NavLink>
+
           { user &&
             <>
             <NavLink to='/dashboard/approvedclasses'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>All Classes</button></NavLink>
@@ -129,12 +132,13 @@ const Navbar = () => {
 
         <div className="lg:hidden flex flex-col gap-2 px-4 pb-4">
           <NavLink to='/' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>Home</button></NavLink>
-          <NavLink to='/dashboard/approvedclasses' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>All Classes</button></NavLink>
-          <NavLink to='/dashboard/teacherform' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>Teach on Triple i School</button></NavLink>
+          <NavLink to='/ourTeachers'><button className='btn w-full'>Our Teachers</button></NavLink>
+          <NavLink to='/freeClasses'><button className='btn w-full'>Free Classes</button></NavLink>
 
         {user ? (
             <>
-             
+               <NavLink to='/dashboard/approvedclasses' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>All Classes</button></NavLink>
+          <NavLink to='/dashboard/teacherform' onClick={() => setIsMenuOpen(false)}><button className='btn w-full'>Teach on Triple i School</button></NavLink>
                <NavLink className='btn w-full text-green-600' to="/dashboard" onClick={closeDropdown}>Dashboard</NavLink>
               <button onClick={() => { handleLogOut(); setIsMenuOpen(false); }} className='btn w-full bg-red-500 text-white'>
                 Log Out
