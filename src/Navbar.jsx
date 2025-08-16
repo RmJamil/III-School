@@ -68,8 +68,12 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden lg:flex gap-4 justify-center w-2/3">
           <NavLink to='/'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Home</button></NavLink>
-          <NavLink to='/dashboard/approvedclasses'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>All Classes</button></NavLink>
+          { user &&
+            <>
+            <NavLink to='/dashboard/approvedclasses'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>All Classes</button></NavLink>
           <NavLink to='/dashboard/teacherform'><button className='btn bg-green-500 hover:bg-green-600 hover:text-white'>Teach on Triple i School</button></NavLink>
+            </>
+          }
         </div>
 
         {/* Auth Section */}
