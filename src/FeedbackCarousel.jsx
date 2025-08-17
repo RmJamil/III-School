@@ -43,7 +43,7 @@ const FeedbackCarousel = () => {
         >
           {ratings.map((rating) => (
             <SwiperSlide key={rating._id}>
-              <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md mx-auto text-center h-full">
+              <div className="border p-4 sm:p-6 rounded-lg shadow-md mx-auto text-center h-full">
                 <div className="flex flex-col items-center">
                   <img
                     src={rating.image || 'https://i.ibb.co/2FsfXqM/default-avatar.png'}
@@ -53,10 +53,10 @@ const FeedbackCarousel = () => {
                   <h3 className="text-sm sm:text-base md:text-lg font-semibold mb-1">
                     <span className="font-bold">Name:</span> {rating.user_name}
                   </h3>
-                  <p className="text-gray-700 text-xs sm:text-sm italic mb-1">
+                  <p className=" text-xs sm:text-sm italic mb-1">
                     <span className="font-bold">Feedback: </span>"{rating.description}"
                   </p>
-                  <p className="text-xs sm:text-sm italic text-gray-500 mb-2">
+                  <p className="text-xs sm:text-sm italic mb-2">
                     <span className="font-bold">Class:</span> {rating.className}
                   </p>
                   <Rating

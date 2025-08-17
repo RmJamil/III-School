@@ -30,7 +30,7 @@ const StatsSection = () => {
         {/* Left: Stats Cards */}
         <div className="grid grid-cols-1 gap-6 w-full md:w-1/2">
           {/* Total Users */}
-          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className=" border shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaUsers className="text-4xl text-blue-500" />
             <div>
               <p className="text-lg font-bold">Total Users</p>
@@ -41,7 +41,7 @@ const StatsSection = () => {
           </div>
 
           {/* Total Classes */}
-          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className="border shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaChalkboardTeacher className="text-4xl text-green-500" />
             <div>
               <p className="text-lg font-bold">Total Classes</p>
@@ -52,7 +52,7 @@ const StatsSection = () => {
           </div>
 
           {/* Total Enrolled */}
-          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className="border shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaUserGraduate className="text-4xl text-purple-500" />
             <div>
               <p className="text-lg font-bold">Total Enrollment</p>
@@ -68,7 +68,7 @@ const StatsSection = () => {
           <img
             src="https://i.postimg.cc/jjzyJb6m/rrr.jpg"
             alt="Dashboard Stats"
-            className="w-full max-h-[300px] object-contain"
+            className="w-full max-h-[300px]  object-contain"
           />
         </div>
       </div>

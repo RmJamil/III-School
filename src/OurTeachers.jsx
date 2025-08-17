@@ -8,7 +8,7 @@ const OurTeachers = () => {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/teachers');
+        const res = await axios.get('https://iii-school-server.vercel.app/teachers');
         setTeachers(res.data);
       } catch (err) {
         console.error(err);

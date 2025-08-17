@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
         path:'all-classes',
         element: <AdminRoute><AllClasses/></AdminRoute> ,
             loader: async () => {
-      const res = await fetch('http://localhost:3000/classCount');
+      const res = await fetch('https://iii-school-server.vercel.app/classCount');
     return res.json(); 
     },
       },
@@ -114,7 +114,7 @@ export const router = createBrowserRouter([
         path:'updateclass/:classid',
         element:<UpdateClass/>,
         loader: async ({ params }) => {
-    const res = await fetch(`http://localhost:3000/updateclasses/${params.classid}`);
+    const res = await fetch(`https://iii-school-server.vercel.app/updateclasses/${params.classid}`);
     return res.json(); 
       }
     },
@@ -126,7 +126,7 @@ export const router = createBrowserRouter([
       path:'progress/:id',
       element:<Progress/>,
       loader: async ({ params }) => {
-    const res = await fetch(`http://localhost:3000/updateclasses/${params.id}`);
+    const res = await fetch(`https://iii-school-server.vercel.app/updateclasses/${params.id}`);
     return res.json(); 
       }
     },
@@ -139,7 +139,7 @@ export const router = createBrowserRouter([
       path:'classdetails/:classid',
       element:<ClassDetails/>,
       loader: async ({ params }) => {
-    const res = await fetch(`http://localhost:3000/updateclasses/${params.classid}`);
+    const res = await fetch(`https://iii-school-server.vercel.app/updateclasses/${params.classid}`);
     return res.json(); 
       }
 
@@ -160,7 +160,7 @@ export const router = createBrowserRouter([
       path:'payments/myenrolled/:id',
       element:<MyEnrolledClassDetails/>,
       loader: async ({ params }) => {
-    const res = await fetch(`http://localhost:3000/updateclasses/${params.id}`);
+    const res = await fetch(`https://iii-school-server.vercel.app/updateclasses/${params.id}`);
     return res.json(); 
       }
     },

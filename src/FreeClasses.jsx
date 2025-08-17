@@ -8,7 +8,7 @@ const FreeClasses = () => {
   useEffect(() => {
     const fetchFreeClasses = async () => {
       try {
-        const res = await axios.get('http://localhost:3000/api/free-classes');
+        const res = await axios.get('https://iii-school-server.vercel.app/api/free-classes');
         setClasses(res.data);
       } catch (err) {
         console.error(err);

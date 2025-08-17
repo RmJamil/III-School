@@ -54,7 +54,7 @@ console.log(uploadedUrl)
   const formData = new FormData();
   formData.append("image", e.target.files[0]);
 try{
-   const res = await fetch("http://localhost:3000/api/upload", {
+   const res = await fetch("https://iii-school-server.vercel.app/api/upload", {
     method: "POST",
     body: formData,
   });
