@@ -36,7 +36,7 @@ const settings = {
   return (
     <section >
          <h2 className="text-4xl  text-green-500 font-bold text-center mt-24 mb-6">Our Partners</h2>
-      <div className="py-2 rounded-2xl bg-blue-50 my-6">
+      <div className="py-2 rounded-2xl  my-6">
        
       <div className="max-w-11/12 mx-auto px-2">
         <Slider {...settings}>

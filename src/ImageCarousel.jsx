@@ -15,7 +15,7 @@ const images = [
 
 const ImageCarousel = () => {
   return (
-    <div className="bg-blue-50 rounded-2xl p-3 sm:p-6">
+    <div className=" rounded-2xl p-3 sm:p-6">
       <h1 className="text-2xl sm:text-4xl text-center text-green-500 font-bold mt-6 sm:mt-12">
         Coming Soon...
       </h1>

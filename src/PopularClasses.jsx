@@ -20,7 +20,7 @@ const PopularClasses = () => {
   if (isError) return <p className="text-center text-red-500">Failed to load popular classes.</p>;
 
   return (
-    <div className="py-10 bg-blue-50 my-12 px-4">
+    <div className="py-10  my-12 px-4">
       <div className=" mx-auto">
         <h2 className="text-2xl sm:text-3xl md:text-4xl text-green-500 font-bold text-center mb-8">
           🔥 Popular Classes

@@ -5,7 +5,7 @@ import BeatingButton from './BeatingButton';
 const TeachSection = () => {
   return (
     <div>
-      <div className="hero rounded-2xl bg-blue-50 my-8 sm:my-12 py-10 sm:py-12">
+      <div className="hero rounded-2xl  my-8 sm:my-12 py-10 sm:py-12">
         <div className="hero-content flex flex-col-reverse lg:flex-row items-center gap-10 lg:gap-24 px-4 sm:px-6">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-green-500">

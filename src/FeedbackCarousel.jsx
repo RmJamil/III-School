@@ -23,7 +23,7 @@ const FeedbackCarousel = () => {
   if (isError) return <p className="text-red-500 text-center">Failed to load feedback.</p>;
 
   return (
-    <section className="py-10 bg-blue-50 rounded-2xl">
+    <section className="py-10  rounded-2xl">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-xl sm:text-2xl md:text-3xl text-green-500 font-bold text-center mb-8">
           💬 What Students Say About Teachers

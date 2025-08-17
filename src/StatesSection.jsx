@@ -22,7 +22,7 @@ const StatsSection = () => {
   return (
  
  
-      <section className="bg-blue-50 my-12 rounded-2xl py-8">
+      <section className=" my-12 rounded-2xl py-8">
            <h1 className='text-center text-5xl font-bold text-green-500 my-4 mb-16'>Statistics</h1>
         <div>
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4">
@@ -30,7 +30,7 @@ const StatsSection = () => {
         {/* Left: Stats Cards */}
         <div className="grid grid-cols-1 gap-6 w-full md:w-1/2">
           {/* Total Users */}
-          <div className="bg-white shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaUsers className="text-4xl text-blue-500" />
             <div>
               <p className="text-lg font-bold">Total Users</p>
@@ -41,7 +41,7 @@ const StatsSection = () => {
           </div>
 
           {/* Total Classes */}
-          <div className="bg-white shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaChalkboardTeacher className="text-4xl text-green-500" />
             <div>
               <p className="text-lg font-bold">Total Classes</p>
@@ -52,7 +52,7 @@ const StatsSection = () => {
           </div>
 
           {/* Total Enrolled */}
-          <div className="bg-white shadow-lg p-6 rounded-lg flex items-center gap-4">
+          <div className=" shadow-lg p-6 rounded-lg flex items-center gap-4">
             <FaUserGraduate className="text-4xl text-purple-500" />
             <div>
               <p className="text-lg font-bold">Total Enrollment</p>
