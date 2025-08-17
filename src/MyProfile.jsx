@@ -24,7 +24,7 @@ const MyProfile = () => {
   return (
     <div>
       <p className='text-3xl text-center font-bold text-orange-500'>{name}'s Profile</p>
-      <div className="max-w-md mx-auto p-6 bg-blue-200 rounded-xl shadow-md space-y-4 mt-10">
+      <div className="max-w-md mx-auto p-6 border-2 border-green-500 rounded-xl shadow-md space-y-4 mt-10">
       <div className="flex items-center space-x-4">
         <img
           src={photo || '/default-user.png'}
@@ -33,11 +33,11 @@ const MyProfile = () => {
         />
         <div>
           <h2 className="text-xl font-bold">{name || 'No Name'}</h2>
-          <p className="text-sm text-gray-500 capitalize"> Role: {role || 'user'}</p>
+          <p className="text-sm  capitalize"> Role: {role || 'user'}</p>
         </div>
       </div>
 
-      <div className="text-gray-700 mt-4 space-y-2">
+      <div className=" mt-4 space-y-2">
         <p><span className="text-xl font-semibold">Email:</span> {email}</p>
         <p><span className="font-semibold">Phone:</span> {phone || 'N/A'}</p>
       </div>

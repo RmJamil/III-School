@@ -97,7 +97,7 @@ const TeacherReq = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <div className="text-center bg-blue-100 p-5 rounded-2xl font-bold mb-4">
+      <div className="text-center p-5 rounded-2xl font-bold mb-4">
         <h2 className="text-3xl text-green-500">Teacher Requests</h2>
         <p className="text-xl">Applications to be a teacher</p>
       </div>
@@ -154,14 +154,14 @@ const TeacherReq = () => {
                     <button
                       onClick={() => handleApprove(req._id, req.email, req.name)}
                       disabled={isFinal}
-                      className="btn btn-success btn-sm"
+                      className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
                     >
                       Approve
                     </button>
                     <button
                       onClick={() => handleReject(req._id, req.email, req.name)}
                       disabled={isFinal}
-                      className="btn btn-error btn-sm"
+                      className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white"
                     >
                       Reject
                     </button>
@@ -178,7 +178,7 @@ const TeacherReq = () => {
         {requests.map((req) => {
           const isFinal = req.status === 'accepted' || req.status === 'rejected';
           return (
-            <div key={req._id} className="border p-4 rounded-xl bg-white shadow">
+            <div key={req._id} className="border p-4 rounded-xl shadow">
               <div className="flex items-center gap-4 mb-2">
                 <div className="avatar">
                   <div className="w-14 rounded-full">
@@ -190,7 +190,7 @@ const TeacherReq = () => {
                 </div>
                 <div>
                   <p className="font-bold">{req.name}</p>
-                  <p className="text-sm text-gray-500">{req.email}</p>
+                  <p className="text-sm ">{req.email}</p>
                 </div>
               </div>
               <p><span className="font-medium">Experience:</span> {req.experience}</p>
@@ -214,14 +214,14 @@ const TeacherReq = () => {
                 <button
                   onClick={() => handleApprove(req._id, req.email, req.name)}
                   disabled={isFinal}
-                  className="btn btn-success btn-sm w-full"
+                  className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => handleReject(req._id, req.email, req.name)}
                   disabled={isFinal}
-                  className="btn btn-error btn-sm w-full"
+                  className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white"
                 >
                   Reject
                 </button>

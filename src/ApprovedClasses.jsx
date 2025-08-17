@@ -42,7 +42,7 @@ const ApprovedClasses = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-8">
         
         {classes.map((classItem) => (
-          <div key={classItem._id} className="card border border-green-500 bg-white shadow-xl rounded-2xl p-1 lg:p-4">
+          <div key={classItem._id} className=" border-2 border-green-500  shadow-xl rounded-2xl p-1 lg:p-4">
             <img
               src={classItem.image}
               alt={classItem.title}
@@ -50,16 +50,16 @@ const ApprovedClasses = () => {
             />
             <div className="mt-4 space-y-2">
               <h2 className="text-xl font-bold">{classItem.title}</h2>
-              <p className="text-gray-600">Instructor: {classItem.name}</p>
-              <p className="text-gray-700">Price: ${classItem.price}</p>
-              <p className="text-gray-500 text-sm">{classItem.description?.slice(0, 80)}...</p>
+              <p className="">Instructor: {classItem.name}</p>
+              <p className="">Price: ${classItem.price}</p>
+              <p className=" text-sm">{classItem.description?.slice(0, 80)}...</p>
               <p className="text-sm font-medium text-lime-600">
                 Total Enrolled: {classItem.students?.length || 0}
               </p>
 
               <button
                 onClick={() => handleEnroll(classItem)}
-                className="btn mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+                className="btn mt-2 bg-green-600  px-4 py-2 rounded hover:bg-green-700 transition"
                 disabled={classItem.students?.includes(user?.email)}
               >
                 {classItem.students?.includes(user?.email)

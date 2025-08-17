@@ -51,7 +51,7 @@ const AllClasses = () => {
 
   return (
     <div className="lg:p-4  w-full lg:max-w-7xl mx-auto">
-      <div className="text-center bg-blue-100 p-4 rounded-2xl mb-6">
+      <div className="text-center  p-4 rounded-2xl mb-6">
         <h2 className="text-2xl text-green-500 font-bold mb-2">All added Classes by teachers</h2>
         <h2 className="text-lg font-bold">Need review from admin</h2>
       </div>
@@ -59,7 +59,7 @@ const AllClasses = () => {
       {/* TABLE VIEW for lg and up */}
       <div className="hidden lg:block w-full overflow-x-auto">
         <table className="table w-full border text-sm">
-          <thead className="bg-gray-100">
+          <thead className="">
             <tr>
               <th>#</th>
               <th>Title</th>

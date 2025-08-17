@@ -28,7 +28,7 @@ const FreeClasses = () => {
       {classes.map((cls) => (
         <div
           key={cls._id}
-          className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          className="border-2 border-green-500 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
         >
           <img
             src={cls.image}
@@ -37,11 +37,11 @@ const FreeClasses = () => {
           />
           <div className="p-4">
             <h3 className="text-xl font-bold">{cls.title}</h3>
-            <p className="text-gray-600 mb-2">{cls.description}</p>
-            <p className="text-sm text-gray-500">Instructor: {cls.name}</p>
-            <p className="text-sm text-gray-500">Email: {cls.email}</p>
+            <p className=" mb-2">{cls.description}</p>
+            <p className="text-sm ">Instructor: {cls.name}</p>
+            <p className="text-sm ">Email: {cls.email}</p>
               <p className="text-sm font-semibold mt-2">
-    Price: <span className="line-through text-gray-400">${cls.price}</span>{' '}
+    Price: <span className="line-through">${cls.price}</span>{' '}
     <span className="text-green-600 font-bold ml-2">$0</span>
   </p>
           </div>

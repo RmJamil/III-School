@@ -27,7 +27,7 @@ const OurTeachers = () => {
       {teachers.map((teacher) => (
         <div
           key={teacher._id}
-          className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+          className="border-2 border-green-500 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
         >
           <img
             src={teacher.photo}
@@ -36,7 +36,7 @@ const OurTeachers = () => {
           />
           <div className="p-4">
             <h3 className="text-xl font-bold">{teacher.name}</h3>
-            <p className="text-gray-600">{teacher.email}</p>
+            <p className="">{teacher.email}</p>
           </div>
         </div>
       ))}

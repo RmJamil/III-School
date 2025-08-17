@@ -30,7 +30,7 @@ const DashboardLayout = () => {
   <div className="drawer-content ">
     {/* Page content here */}
    {/* Navbar */}
-    <div className="navbar bg-slate-100 w-full lg:hidden my-4">
+    <div className="navbar  w-full lg:hidden my-4">
       <div className="flex-none lg:hidden ">
         <label htmlFor="my-drawer-2" aria-label="open sidebar" className="btn btn-square btn-ghost">
           <svg
@@ -52,7 +52,7 @@ const DashboardLayout = () => {
   
     </div>
     {/* Page content here */}
-<div className='bg-slate-100  border border-green-500 min-h-full lg:ml-2  rounded-r-2xl rounded-l-lg p-2 lg:p-6'>
+<div className='  border border-green-500 min-h-full lg:ml-2  rounded-r-2xl rounded-l-lg p-2 lg:p-6'>
   <Outlet>
 
   </Outlet>
@@ -60,7 +60,7 @@ const DashboardLayout = () => {
   </div>
   <div className="drawer-side border border-green-500 rounded-l-2xl  rounded-r-lg ">
     <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-    <ul className="menu bg-base-200 text-base-content min-h-full rounded-r-2xl mt-56 lg:mt-0 w-44 lg:w-80 ">
+    <ul className="menu min-h-full rounded-r-2xl mt-56 lg:mt-0 w-44 lg:w-80 ">
       {/* Sidebar content here */}
       <p className='p-3 lg:text-xl font-bold text-green-600'>Dashboard</p>
 

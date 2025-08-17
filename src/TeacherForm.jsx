@@ -50,7 +50,7 @@ const TeacherForm = () => {
   return (
     <div className="">
       <h2 className="text-3xl font-bold text-center text-green-600 mb-4">Apply for Teacher Position</h2>
-  <div className="max-w-xl mx-auto bg-white shadow-md rounded p-6 mt-8">
+  <div className="max-w-xl mx-auto border-2 border-green-500 shadow-md rounded p-6 mt-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
         {/* Name (auto-filled) */}
@@ -60,7 +60,7 @@ const TeacherForm = () => {
             type="text"
             defaultValue={user?.displayName || ''}
             readOnly
-            className="input input-bordered w-full"
+            className="input text-black input-bordered w-full"
           />
         </div>
 
@@ -71,7 +71,7 @@ const TeacherForm = () => {
             type="email"
             defaultValue={user?.email || ''}
             readOnly
-            className="input input-bordered w-full"
+            className="input text-black input-bordered w-full"
           />
         </div>
 
@@ -92,7 +92,7 @@ const TeacherForm = () => {
             type="text"
             {...register('title', { required: true })}
             placeholder="Ex: Frontend Developer"
-            className="input input-bordered w-full"
+            className="input text-black input-bordered w-full"
           />
           {errors.title && <p className="text-red-500 text-sm">Title is required</p>}
         </div>
@@ -102,7 +102,7 @@ const TeacherForm = () => {
           <label className="label">Experience Level</label>
           <select
             {...register('experience', { required: true })}
-            className="select select-bordered w-full"
+            className="select text-black select-bordered w-full"
             defaultValue=""
           >
             <option value="" disabled>Select experience</option>
@@ -118,7 +118,7 @@ const TeacherForm = () => {
           <label className="label">Category</label>
           <select
             {...register('category', { required: true })}
-            className="select select-bordered w-full"
+            className="select text-black select-bordered w-full"
             defaultValue=""
           >
             <option value="" disabled>Select category</option>
@@ -133,7 +133,7 @@ const TeacherForm = () => {
 
         {/* Submit Button */}
         <div>
-          <button type="submit" className="btn bg-green-500 hover:bg-green-600 hover:text-white w-full" disabled={isPending}>
+          <button type="submit" className=" p-2 rounded-lg cursor-pointer border-2 border-green-500 hover:bg-green-600 hover:text-white w-full" disabled={isPending}>
             {isPending ? 'Submitting...' : 'Submit for Review'}
           </button>
           {isSuccess && <p className="text-green-500 mt-2">Request submitted successfully!</p>}

@@ -76,14 +76,14 @@ const Users = () => {
           />
           <div className="flex gap-2">
             <button
-              className="btn bg-green-500 hover:bg-green-600 hover:text-white border-none"
+              className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
               onClick={handleSearch}
             >
               Search
             </button>
             {(searchEmail || submittedEmail) && (
               <button
-                className="btn bg-green-500 hover:bg-green-600 hover:text-white border-none"
+                className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white"
                 onClick={handleClear}
               >
                 Clear
@@ -93,7 +93,7 @@ const Users = () => {
         </div>
       </div>
 
-      <div className="text-center lg:p-3 bg-blue-100 text-2xl mt-6 text-green-500 font-bold">
+      <div className="text-center lg:p-3  text-2xl mt-6 text-green-500 font-bold">
         All Users
       </div>
 
@@ -108,8 +108,8 @@ const Users = () => {
       {!isLoading && users.length > 0 && (
         <>
         <div className=' hidden lg:table'>
-            <table className="table w-full border my-12">
-            <thead className="bg-base-200">
+            <table className="border-2 border-green-500 w-full  my-12">
+           
               <tr>
                 <th>#</th>
                 <th>Profile</th>
@@ -118,7 +118,7 @@ const Users = () => {
                 <th>Role</th>
                 <th>Action</th>
               </tr>
-            </thead>
+
             <tbody>
               {users.map((user, idx) => (
                 <tr key={user._id} className="hover">
@@ -140,10 +140,10 @@ const Users = () => {
                     <button
                       onClick={() => handleToggleAdmin(user.email)}
                       disabled={user.role === 'admin'}
-                      className={`btn btn-sm ${
+                      className={`border-2 border-green-500 py-1 px-2 rounded-lg   ${
                         user.role === 'admin'
-                          ? 'btn-error cursor-not-allowed opacity-70'
-                          : 'btn-outline bg-green-500 hover:bg-green-600 hover:text-white border-none'
+                          ? '    bg-green-500 cursor-not-allowed'
+                          : ' cursor-pointer hover:bg-green-500 hover:text-white'
                       }`}
                     >
                       {user.role === 'admin' ? 'Admin' : 'Make Admin'}
@@ -170,7 +170,7 @@ const Users = () => {
                   </div>
                   <div>
                     <h3 className="text-lg font-bold">{user.name || 'N/A'}</h3>
-                    <p className="text-sm text-gray-600">{user.email}</p>
+                    <p className="text-sm ">{user.email}</p>
                     <p className="capitalize text-sm font-medium mt-1">
                       Role: {user.role || 'student'}
                     </p>
@@ -182,8 +182,8 @@ const Users = () => {
                     disabled={user.role === 'admin'}
                     className={`btn btn-sm w-full mt-2 ${
                       user.role === 'admin'
-                        ? 'btn-error cursor-not-allowed opacity-70'
-                        : 'btn-outline bg-green-500 hover:bg-green-600 hover:text-white border-none'
+                        ? 'border-2 border-green-500 py-1 px-2 rounded-lg  hover:bg-red-500 hover:text-white cursor-not-allowed '
+                        : 'border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white'
                     }`}
                   >
                     {user.role === 'admin' ? 'Admin' : 'Make Admin'}
