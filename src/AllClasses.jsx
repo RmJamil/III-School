@@ -59,7 +59,7 @@ const AllClasses = () => {
       {/* TABLE VIEW for lg and up */}
       <div className="hidden lg:block w-full overflow-x-auto">
         <table className="table w-full border text-sm">
-          <thead className="">
+          <thead className="bg-white">
             <tr>
               <th>#</th>
               <th>Title</th>

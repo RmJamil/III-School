@@ -108,9 +108,10 @@ const Users = () => {
       {!isLoading && users.length > 0 && (
         <>
         <div className=' hidden lg:table'>
-            <table className="border-2 border-green-500 w-full  my-12">
+            <table className="border w-full  my-12">
            
-              <tr>
+          <thead className='bg-white'>
+                <tr>
                 <th>#</th>
                 <th>Profile</th>
                 <th>Name</th>
@@ -118,6 +119,7 @@ const Users = () => {
                 <th>Role</th>
                 <th>Action</th>
               </tr>
+          </thead>
 
             <tbody>
               {users.map((user, idx) => (
