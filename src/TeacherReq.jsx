@@ -97,7 +97,7 @@ const TeacherReq = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <div className="text-center p-5 rounded-2xl font-bold mb-4">
+      <div className="text-center p-5 rounded-2xl font-bold mb-4 border">
         <h2 className="text-3xl text-green-500">Teacher Requests</h2>
         <p className="text-xl">Applications to be a teacher</p>
       </div>

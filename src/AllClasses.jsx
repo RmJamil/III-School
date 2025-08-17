@@ -51,7 +51,7 @@ const AllClasses = () => {
 
   return (
     <div className="lg:p-4  w-full lg:max-w-7xl mx-auto">
-      <div className="text-center  p-4 rounded-2xl mb-6">
+      <div className="text-center border p-4 rounded-2xl mb-6">
         <h2 className="text-2xl text-green-500 font-bold mb-2">All added Classes by teachers</h2>
         <h2 className="text-lg font-bold">Need review from admin</h2>
       </div>
@@ -107,7 +107,7 @@ const AllClasses = () => {
                     <button
                       onClick={() => handleStatusChange(classItem._id, 'accepted')}
                       disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
-                      className="btn btn-sm btn-success"
+                      className="flex items-center border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
                       title="Approve"
                     >
                       <FaCheck className="mr-1" /> Approve
@@ -116,7 +116,7 @@ const AllClasses = () => {
                     <button
                       onClick={() => handleStatusChange(classItem._id, 'rejected')}
                       disabled={classItem.status === 'accepted' || classItem.status === 'rejected'}
-                      className="btn btn-sm btn-error"
+                      className="flex items-center border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-red-500 hover:text-white"
                       title="Reject"
                     >
                       <FaTimes className="mr-1" /> Reject
@@ -128,7 +128,7 @@ const AllClasses = () => {
                     to={classItem.status === 'accepted' && `/dashboard/classprogress/${classItem._id}`}
                   >
                     <button
-                      className="btn btn-sm btn-info"
+                      className="flex items-center border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-sky-500 hover:text-white"
                       disabled={classItem.status !== 'accepted'}
                       title="Progress"
                     >

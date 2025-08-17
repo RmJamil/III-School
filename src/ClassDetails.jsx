@@ -28,7 +28,7 @@ const handlePay=(classId)=>{
         <div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-          <div key={classdetails._id} className="card bg-base-100 shadow-xl border">
+          <div key={classdetails._id} className="card  shadow-xl border">
             <figure>
               <img src={classdetails.image} alt={classdetails.title} className="h-52 w-full object-cover" />
             </figure>
@@ -55,7 +55,7 @@ const handlePay=(classId)=>{
 
                <button
                onClick={()=>handlePay(classId)}
-  className="btn bg-green-500 hover:bg-green-600 hover:text-white"
+  className="btn mt-2 border border-green-500  px-4 py-2 rounded hover:bg-green-500 hover:text-white transition"
   disabled={hasPaid || isLoading}
 >
   {hasPaid ? 'Already Paid' : 'Pay Now'}

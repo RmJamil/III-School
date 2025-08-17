@@ -14,11 +14,11 @@
 }
 
 .nav-link:hover {
-  background-color: #e5e7eb; /* Tailwind's gray-200 */
+  color: limegreen; 
 }
 
 .nav-link.active {
-  background-color: #d1d5db; /* Tailwind's gray-300 */
+  background-color: #abababab; /* Tailwind's gray-300 */
   font-weight: 600;
 }
 

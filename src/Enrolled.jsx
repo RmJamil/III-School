@@ -56,7 +56,7 @@ const Enrolled = () => {
         <>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
             {currentPayments.map((payment) => (
-              <div key={payment.transactionId} className="card bg-base-100 shadow-xl p-4 border">
+              <div key={payment.transactionId} className="card  shadow-xl p-4 border">
                 <div className="card-body">
                   <img src={payment.image} alt="" />
                   <h2 className="card-title">
@@ -97,7 +97,7 @@ const Enrolled = () => {
           />
         </>
       ) : (
-        <div className='flex justify-center items-center bg-blue-100 my-4 rounded-2xl h-[60vh]'>
+        <div className='flex justify-center items-center border my-4 rounded-2xl h-[60vh]'>
           <p className='text-center text-3xl font-bold text-orange-500'>
             You have not enrolled any class yet
           </p>

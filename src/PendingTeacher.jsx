@@ -2,7 +2,8 @@ import React from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import Swal from 'sweetalert2';
-import useAxiosSecure from './UseAxiosSecure';
+import useAxiosSecure from './useAxiosSecure';
+
 
 const PendingTeacher = () => {
   const axiosSecure = useAxiosSecure();
@@ -85,7 +86,7 @@ const PendingTeacher = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
-      <div className="text-center bg-blue-100 p-5 rounded-2xl font-bold mb-4">
+      <div className="text-center border p-5 rounded-2xl font-bold mb-4">
         <h2 className="text-3xl text-green-500">Teacher Requests</h2>
         <p className="text-xl">Pending applications to be a teacher</p>
       </div>

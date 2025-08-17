@@ -56,7 +56,7 @@ const MyClasses = () => {
 
   return (
     <div className="max-w-6xl mx-auto p-6">
-      <div className='text-center p-5 bg-blue-100 rounded-2xl my-6'>
+      <div className='text-center p-5  rounded-2xl my-6'>
         <h2 className="text-3xl text-green-500 font-bold mb-4">Classes added by <span className='text-orange-500 italic'>{user?.displayName}</span> </h2>
       </div>
 
@@ -64,7 +64,7 @@ const MyClasses = () => {
         <>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {currentItems.map((classItem) => (
-              <div key={classItem._id} className="card bg-base-100 shadow-xl border">
+              <div key={classItem._id} className="card border shadow-xl ">
                 <figure>
                   <img
                     src={classItem.image || '/default-class.jpg'}
@@ -105,8 +105,8 @@ const MyClasses = () => {
 
                     <Link
                       to={`/dashboard/classprogress/${classItem._id}`}
-                      className={`btn border border-green-500 hover:bg-green-600 hover:text-white ${
-                        classItem.status === 'accepted' ? 'btn-info' : 'btn-disabled'
+                      className={`btn border border-blue-400 hover:bg-blue-400 hover:text-white ${
+                        classItem.status === 'accepted' ? '' : 'btn-disabled'
                       }`}
                     >
                       See Details

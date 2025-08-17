@@ -78,18 +78,18 @@ try{
 
   return (
     <div className="max-w-3xl mx-auto p-6">
-     <div className='bg-blue-100 text-center rounded-2xl p-5 my-6'>
+     <div className=' text-center rounded-2xl p-5 my-6'>
        <h2 className="text-3xl font-bold text-green-500 ">Add New Class</h2>
      </div>
 
-    <div className='bg-blue-100 p-12 rounded-2xl'>
+    <div className='border p-12 rounded-2xl'>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 ">
         <div>
           <label className="label">Title</label>
           <input
             {...register('title', { required: true })}
             type="text"
-            className="input input-bordered w-full"
+            className="input text-black input-bordered w-full"
             placeholder="Enter class title"
           />
         </div>
@@ -101,7 +101,7 @@ try{
               type="text"
               value={user?.displayName || ''}
               readOnly
-              className="input input-bordered w-full bg-gray-100"
+              className="input text-black input-bordered w-full bg-gray-100"
             />
           </div>
 
@@ -111,7 +111,7 @@ try{
               type="email"
               value={user?.email || ''}
               readOnly
-              className="input input-bordered w-full bg-gray-100"
+              className="input text-black input-bordered w-full bg-gray-100"
             />
           </div>
         </div>
@@ -122,7 +122,7 @@ try{
             {...register('price', { required: true })}
             type="number"
             step="0.01"
-            className="input input-bordered w-full"
+            className="input input-bordered text-black w-full"
             placeholder="Enter price"
           />
         </div>
@@ -131,16 +131,16 @@ try{
           <label className="label">Description</label>
           <textarea
             {...register('description', { required: true })}
-            className="textarea textarea-bordered w-full"
+            className="textarea text-black textarea-bordered w-full"
             placeholder="Class description"
           ></textarea>
         </div>
         <div>
            <label className="label mr-3 text-lg">Upload photo:</label>
-          <input className='file-input file-input-bordered w-full max-w-xs' type="file" onChange={handleImage} placeholder='Your photo' />
+          <input className='file-input file-input-bordered text-black w-full max-w-xs' type="file" onChange={handleImage} placeholder='Your photo' />
         </div>
 
-   {loading && <p className="text-blue-600">Uploading...</p>}
+   {loading && <p className="text-green-500">Uploading...</p>}
          {uploadedUrl && (
         <div className="mt-4">
           <p className="text-sm text-green-600 my-1">Uploaded image:</p>
@@ -153,7 +153,7 @@ try{
       )}
 
         <div className='text-right'>
-          <button type="submit" className="btn bg-green-600  text-white mt-4">Add Class</button>
+          <button type="submit" className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white">Add Class</button>
         </div>
       </form>
     </div>

@@ -59,7 +59,7 @@ const ApprovedClasses = () => {
 
               <button
                 onClick={() => handleEnroll(classItem)}
-                className="btn mt-2 bg-green-600  px-4 py-2 rounded hover:bg-green-700 transition"
+                className="btn mt-2 border border-green-500  px-4 py-2 rounded hover:bg-green-500 hover:text-white transition"
                 disabled={classItem.students?.includes(user?.email)}
               >
                 {classItem.students?.includes(user?.email)

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 import Pagination from './Pagination';
-import useAxiosSecure from './UseAxiosSecure';
+import useAxiosSecure from './useAxiosSecure';
+
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -72,11 +73,11 @@ const Users = () => {
             value={searchEmail}
             onChange={(e) => setSearchEmail(e.target.value)}
             placeholder="Search by name/email"
-            className="input input-bordered w-full"
+            className="input text-black input-bordered w-full"
           />
           <div className="flex gap-2">
             <button
-              className="border-2 border-green-500 py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
+              className="border-2 border-green-500  py-1 px-2 rounded-lg cursor-pointer hover:bg-green-500 hover:text-white"
               onClick={handleSearch}
             >
               Search
@@ -93,7 +94,7 @@ const Users = () => {
         </div>
       </div>
 
-      <div className="text-center lg:p-3  text-2xl mt-6 text-green-500 font-bold">
+      <div className="text-center lg:p-6 text-2xl mt-6 text-green-500 font-bold border rounded-2xl ">
         All Users
       </div>
 

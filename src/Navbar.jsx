@@ -71,7 +71,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 bg-blue-200 rounded-2xl shadow-sm  lg:px-16 py-2">
+    <div className="sticky top-0 z-50 bg-blue-200  shadow-sm  lg:px-16 py-2">
       <div className="navbar flex justify-between items-center p-4">
         {/* Logo Section */}
         <div className="flex items-center gap-2">
@@ -121,7 +121,7 @@ const Navbar = () => {
                   </div>
                 </div>
 
-                <ul tabIndex={0} className="menu menu-sm dropdown-content bg-blue-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
+                <ul tabIndex={0} className="menu menu-sm dropdown-content  rounded-box z-10 mt-8 border w-52 p-2 shadow">
                   <div className="flex justify-between font-bold border-b pb-1">
                     {user?.displayName}
                     <span className="badge text-green-500">logged in</span>

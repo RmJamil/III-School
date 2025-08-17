@@ -200,7 +200,7 @@ else{
 
 
 <div className='w-1/2 mx-auto mt-2'>
-  <button disabled={alreadyPaid} className={`btn   bg-green-500 w-full mx-auto rounded-xl  ${process ? 'btn-disabled' : 'btn-primary' }`}type="submit">
+  <button disabled={alreadyPaid} className={`btn hover:bg-green-600 bg-green-500 w-full mx-auto rounded-xl  ${process ? 'btn-disabled' : 'btn-primary' }`}type="submit">
   {process ? 'Processing...' : alreadyPaid ? 'Paid ✔️' : `Pay $${amount}`}
 </button>
 </div>
